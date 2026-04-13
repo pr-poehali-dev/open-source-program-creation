@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import IncidentModal from "@/components/IncidentModal";
+import AiChat from "@/components/AiChat";
 
 const INCIDENTS = [
   { id: "INC-001", type: "ecology", title: "Незаконная вырубка леса", country: "Бразилия", status: "active", severity: "high", date: "12.04.2026", responsible: "ОГР-Южная Америка", ai: 92 },
@@ -47,6 +49,8 @@ export default function EgsuDashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<NavTab>("overview");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [selectedIncident, setSelectedIncident] = useState<typeof INCIDENTS[0] | null>(null);
+  const [chatOpen, setChatOpen] = useState(false);
 
   const filtered = statusFilter === "all" ? INCIDENTS : INCIDENTS.filter(i => i.status === statusFilter);
 
@@ -180,8 +184,12 @@ export default function EgsuDashboard() {
                   <button onClick={() => setActiveTab("incidents")} className="text-xs text-white/30 hover:text-white/60 transition-colors">Все →</button>
                 </div>
                 {INCIDENTS.slice(0, 4).map((inc) => (
-                  <div key={inc.id} className="flex items-center gap-4 px-5 py-3 hover:bg-white/2 transition-colors"
-                    style={{ borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
+                  <div key={inc.id}
+                    onClick={() => setSelectedIncident(inc)}
+                    className="flex items-center gap-4 px-5 py-3 cursor-pointer transition-colors"
+                    style={{ borderBottom: "1px solid rgba(255,255,255,0.03)" }}
+                    onMouseEnter={e => (e.currentTarget.style.background = "rgba(168,85,247,0.07)")}
+                    onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
                     <div className="w-2 h-2 rounded-full shrink-0" style={{ background: STATUS_COLORS[inc.status] }} />
                     <span className="text-white/30 text-xs w-20 shrink-0">{inc.id}</span>
                     <span className="text-white/80 text-sm flex-1 truncate">{inc.title}</span>
@@ -190,6 +198,7 @@ export default function EgsuDashboard() {
                       style={{ background: `${STATUS_COLORS[inc.status]}15`, color: STATUS_COLORS[inc.status] }}>
                       {STATUS_LABELS[inc.status]}
                     </span>
+                    <Icon name="ChevronRight" size={12} className="text-purple-400 opacity-50 shrink-0" />
                   </div>
                 ))}
               </div>
@@ -232,8 +241,12 @@ export default function EgsuDashboard() {
                     </thead>
                     <tbody>
                       {filtered.map((inc) => (
-                        <tr key={inc.id} className="hover:bg-white/2 transition-colors"
-                          style={{ borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
+                        <tr key={inc.id}
+                          onClick={() => setSelectedIncident(inc)}
+                          className="transition-colors cursor-pointer"
+                          style={{ borderBottom: "1px solid rgba(255,255,255,0.03)" }}
+                          onMouseEnter={e => (e.currentTarget.style.background = "rgba(168,85,247,0.07)")}
+                          onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
                           <td className="px-4 py-3 text-white/30 text-xs">{inc.id}</td>
                           <td className="px-4 py-3">
                             <span className="text-xs px-2 py-0.5 rounded-full"
@@ -258,7 +271,12 @@ export default function EgsuDashboard() {
                             <span style={{ color: inc.ai >= 85 ? "#00ff87" : inc.ai >= 75 ? "#f59e0b" : "#f43f5e" }}
                               className="text-sm font-semibold">{inc.ai}%</span>
                           </td>
-                          <td className="px-4 py-3 text-white/40 text-xs whitespace-nowrap">{inc.responsible}</td>
+                          <td className="px-4 py-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-white/40 text-xs whitespace-nowrap">{inc.responsible}</span>
+                              <Icon name="ChevronRight" size={12} className="text-purple-400 opacity-60" />
+                            </div>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -354,6 +372,25 @@ export default function EgsuDashboard() {
           </div>
         </main>
       </div>
+
+      {/* AI Chat button */}
+      {!chatOpen && (
+        <button
+          onClick={() => setChatOpen(true)}
+          className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all hover:scale-110"
+          style={{ background: "linear-gradient(135deg, #a855f7, #3b82f6)", boxShadow: "0 0 24px rgba(168,85,247,0.5)" }}>
+          <Icon name="Bot" size={24} className="text-white" />
+          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-green-400 border-2 animate-pulse" style={{ borderColor: "#060a12" }} />
+        </button>
+      )}
+
+      {/* AI Chat panel */}
+      {chatOpen && <AiChat onClose={() => setChatOpen(false)} />}
+
+      {/* Incident detail modal */}
+      {selectedIncident && (
+        <IncidentModal incident={selectedIncident} onClose={() => setSelectedIncident(null)} />
+      )}
     </div>
   );
 }
