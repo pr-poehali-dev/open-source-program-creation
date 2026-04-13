@@ -324,7 +324,7 @@ export default function Index() {
             </div>
             <span className="font-display text-sm font-bold text-white/60 tracking-wide">NEXAFLOW</span>
           </div>
-          <p className="text-white/30 text-xs">© 2026 NexaFlow. Все права защищены.</p>
+          <p className="text-white/30 text-xs">© 2024 Николаев Владимир Владимирович. Все права защищены.</p>
           <div className="flex items-center gap-1.5 text-xs text-white/30">
             <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#00ff87' }} />
             Все системы работают
