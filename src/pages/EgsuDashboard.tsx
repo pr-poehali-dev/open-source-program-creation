@@ -389,6 +389,12 @@ export default function EgsuDashboard() {
           </div>
         </div>
         <div className="flex items-center gap-2">
+          <button onClick={() => navigate("/egsu/finance")}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:scale-105"
+            style={{ background: "rgba(245,158,11,0.12)", color: "#f59e0b", border: "1px solid rgba(245,158,11,0.25)" }}>
+            <Icon name="Wallet" size={14} />
+            <span className="hidden md:block">Финансы</span>
+          </button>
           <button onClick={() => navigate("/egsu/legal")}
             className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:scale-105"
             style={{ background: "rgba(0,255,135,0.1)", color: "#00ff87", border: "1px solid rgba(0,255,135,0.2)" }}>
