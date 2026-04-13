@@ -10,6 +10,7 @@ const REG_NUM = "ЕЦСУ-2026-001";
 
 const DOCS = [
   { id: "copyright", icon: "FileText", color: "#00ff87", label: "Свидетельство об авторском праве" },
+  { id: "fips", icon: "Stamp", color: "#06b6d4", label: "Заявка в Роспатент (ФИПС)" },
   { id: "partnership", icon: "Handshake", color: "#a855f7", label: "Партнёрское соглашение" },
   { id: "privacy", icon: "Shield", color: "#3b82f6", label: "Политика конфиденциальности" },
   { id: "terms", icon: "Scale", color: "#f59e0b", label: "Пользовательское соглашение" },
@@ -468,8 +469,224 @@ function DocLegalization() {
   );
 }
 
+function DocFips() {
+  return (
+    <div className="doc-print text-sm">
+      {/* Шапка */}
+      <div className="text-center mb-6">
+        <div className="text-xs uppercase tracking-widest text-gray-500 mb-1">Федеральная служба по интеллектуальной собственности</div>
+        <div className="text-xs text-gray-500 mb-3">(Роспатент) · Федеральный институт промышленной собственности (ФИПС)</div>
+        <div className="border-2 border-black inline-block px-6 py-2 mb-3">
+          <div className="font-bold text-base uppercase">Заявка</div>
+          <div className="text-xs">на государственную регистрацию программы для ЭВМ</div>
+        </div>
+        <div className="text-xs text-gray-500">Форма РП (в соответствии с Приказом Минэкономразвития России от 05.04.2016 № 211)</div>
+      </div>
+
+      {/* Раздел 1 */}
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">
+          Раздел I. Сведения о заявителе
+        </div>
+        <table className="w-full border-collapse text-xs">
+          <tbody>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 w-1/3 bg-gray-50 font-medium">1.1. Правообладатель (Ф.И.О. / наименование)</td>
+              <td className="border border-gray-400 px-2 py-2 font-bold">Николаев Владимир Владимирович</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">1.2. Гражданство / страна регистрации</td>
+              <td className="border border-gray-400 px-2 py-2">Российская Федерация</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">1.3. Адрес для переписки</td>
+              <td className="border border-gray-400 px-2 py-2 text-gray-400 italic">указать почтовый адрес</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">1.4. Телефон / Email</td>
+              <td className="border border-gray-400 px-2 py-2 text-gray-400 italic">указать контактные данные</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">1.5. СНИЛС / ИНН (для физ. лица)</td>
+              <td className="border border-gray-400 px-2 py-2 text-gray-400 italic">указать СНИЛС</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* Раздел 2 */}
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">
+          Раздел II. Сведения об авторах
+        </div>
+        <table className="w-full border-collapse text-xs">
+          <tbody>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 w-1/3 bg-gray-50 font-medium">2.1. Автор(ы) программы</td>
+              <td className="border border-gray-400 px-2 py-2 font-bold">Николаев Владимир Владимирович</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">2.2. Соавторы / партнёры</td>
+              <td className="border border-gray-400 px-2 py-2">Poehali.dev — технический партнёр-разработчик (49% партнёрский пакет)</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">2.3. Права автора переданы правообладателю?</td>
+              <td className="border border-gray-400 px-2 py-2">☑ Нет (автор и правообладатель совпадают)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* Раздел 3 */}
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">
+          Раздел III. Сведения о программе для ЭВМ
+        </div>
+        <table className="w-full border-collapse text-xs">
+          <tbody>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 w-1/3 bg-gray-50 font-medium">3.1. Полное наименование программы</td>
+              <td className="border border-gray-400 px-2 py-2 font-bold">«ЕЦСУ 2.0 — Единая Центральная Система Управления»</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">3.2. Сокращённое наименование</td>
+              <td className="border border-gray-400 px-2 py-2 font-bold">ЕЦСУ 2.0</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">3.3. Дата создания (первой публикации)</td>
+              <td className="border border-gray-400 px-2 py-2">13 апреля 2026 г.</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">3.4. Год выпуска в свет</td>
+              <td className="border border-gray-400 px-2 py-2">2026</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">3.5. Язык программирования</td>
+              <td className="border border-gray-400 px-2 py-2">TypeScript (React), Python 3.11, SQL (PostgreSQL)</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">3.6. Тип программы</td>
+              <td className="border border-gray-400 px-2 py-2">Веб-приложение (SPA — Single Page Application), облачный сервис</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">3.7. Объём программы</td>
+              <td className="border border-gray-400 px-2 py-2">Более 15 000 строк исходного кода</td>
+            </tr>
+            <tr>
+              <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">3.8. Операционная система / среда</td>
+              <td className="border border-gray-400 px-2 py-2">Кроссплатформенная (Windows, macOS, Linux, Android, iOS) — работает в браузере</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* Раздел 4 */}
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">
+          Раздел IV. Реферат (назначение и функции программы)
+        </div>
+        <div className="border border-gray-400 p-3 text-xs leading-relaxed">
+          <p className="mb-2">
+            Программа <strong>«ЕЦСУ 2.0 — Единая Центральная Система Управления»</strong> предназначена
+            для автоматизированного мониторинга, верификации и реагирования на инциденты в сфере
+            экологии, кибербезопасности, прав человека и международного права.
+          </p>
+          <p className="mb-2">
+            <strong>Основные функции программы:</strong>
+          </p>
+          <ul className="list-disc list-inside space-y-1 mb-2">
+            <li>Приём и регистрация сообщений об инцидентах от граждан, НКО и государственных органов</li>
+            <li>Автоматическая верификация достоверности инцидентов по алгоритму МГП (принципы различия, соразмерности, необходимости) с присвоением балла доверия от 0 до 100</li>
+            <li>Формирование рекомендаций по реагированию с указанием правовой основы (международные конвенции, протоколы)</li>
+            <li>Автоматическое применение допустимых мер реагирования (уведомления, мониторинг, запросы)</li>
+            <li>ИИ-ассистент на основе встроенной базы знаний международного права</li>
+            <li>Голосовое управление дашбордом (интеграция Яндекс SpeechKit)</li>
+            <li>Хранение данных в реляционной СУБД PostgreSQL с журналом действий</li>
+            <li>Публичная отчётность в режиме реального времени</li>
+          </ul>
+          <p>
+            Программа реализует концепцию цифровой платформы международного управления
+            с опорой на научные данные и ИИ-аналитику согласно Регламенту ЕЦСУ (Раздел 1–7).
+          </p>
+        </div>
+      </div>
+
+      {/* Раздел 5 */}
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">
+          Раздел V. Прилагаемые документы
+        </div>
+        <div className="border border-gray-400 p-3 text-xs">
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { n: "1", doc: "Депонируемые материалы (исходный код на CD/USB)", check: "☑" },
+              { n: "2", doc: "Документ, подтверждающий уплату государственной пошлины", check: "☐" },
+              { n: "3", doc: "Доверенность (при подаче через представителя)", check: "☐" },
+              { n: "4", doc: "Договор об отчуждении прав (если применимо)", check: "☐" },
+              { n: "5", doc: "Описание интерфейса и скриншоты программы", check: "☑" },
+              { n: "6", doc: "Партнёрское соглашение (Николаев В.В. + Poehali.dev)", check: "☑" },
+            ].map(({ n, doc, check }) => (
+              <div key={n} className="flex items-start gap-2">
+                <span className="text-gray-500">{n}.</span>
+                <span>{check} {doc}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 p-2 bg-yellow-50 border border-yellow-300 rounded text-xs text-yellow-800">
+            ⚠ Государственная пошлина за регистрацию программы для ЭВМ: <strong>4 500 руб.</strong> (пп. 3.14 п. 1 ст. 333.30 НК РФ).
+            Реквизиты для оплаты: ФИПС, ИНН 7730036760, КПП 773001001, ОКТМО 45375000.
+          </div>
+        </div>
+      </div>
+
+      {/* Раздел 6 */}
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">
+          Раздел VI. Подпись заявителя
+        </div>
+        <div className="border border-gray-400 p-4 text-xs">
+          <p className="mb-4">
+            Я, нижеподписавшийся, подтверждаю, что сведения, указанные в настоящей заявке,
+            являются достоверными, и что мне известны требования законодательства Российской
+            Федерации об ответственности за представление заведомо ложных сведений.
+          </p>
+          <div className="grid grid-cols-3 gap-6 mt-6">
+            <div className="text-center">
+              <div className="border-t border-black pt-1">Дата подачи</div>
+              <div className="text-gray-400 mt-1">___ . ___ . 2026</div>
+            </div>
+            <div className="text-center">
+              <div className="border-t border-black pt-1">Подпись заявителя</div>
+              <div className="text-gray-300 mt-4 text-lg">_______________</div>
+            </div>
+            <div className="text-center">
+              <div className="border-t border-black pt-1">Расшифровка</div>
+              <div className="text-gray-600 mt-1 font-semibold text-[10px]">Николаев В.В.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Служебная отметка */}
+      <div className="mt-6 border-2 border-dashed border-gray-300 p-3 text-xs">
+        <div className="font-bold text-gray-500 mb-2 uppercase text-[10px]">Служебная отметка ФИПС (заполняется регистратором)</div>
+        <div className="grid grid-cols-3 gap-4 text-gray-400">
+          <div>Вх. № заявки: ________________</div>
+          <div>Дата поступления: ____________</div>
+          <div>Подпись: ____________________</div>
+        </div>
+      </div>
+
+      <div className="mt-4 text-center text-[10px] text-gray-400">
+        Подать заявку можно онлайн: <strong>new.fips.ru</strong> · или по почте: 125993, г. Москва, Бережковская наб., д. 30, корп. 1, ФИПС
+      </div>
+    </div>
+  );
+}
+
 const DOC_COMPONENTS: Record<string, () => JSX.Element> = {
   copyright: DocCopyright,
+  fips: DocFips,
   partnership: DocPartnership,
   privacy: DocPrivacy,
   terms: DocTerms,
