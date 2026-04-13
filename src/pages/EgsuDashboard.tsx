@@ -103,7 +103,7 @@ export default function EgsuDashboard() {
           </div>
           <div>
             <div className="font-display text-base font-bold text-white tracking-wide leading-none">ДАШБОРД КООРДИНАТОРА</div>
-            <div className="text-white/30 text-[10px]">ЕГСУ 2.0 · Аналитика</div>
+            <div className="text-white/30 text-[10px]">ЕЦСУ 2.0 · Аналитика</div>
           </div>
         </div>
         <button onClick={() => navigate("/egsu/report")}
@@ -122,7 +122,7 @@ export default function EgsuDashboard() {
             { key: "overview", icon: "BarChart3", label: "Обзор" },
             { key: "incidents", icon: "AlertTriangle", label: "Инциденты" },
             { key: "ai", icon: "Cpu", label: "ИИ-аналитика" },
-            { key: "organs", icon: "Network", label: "Органы ЕГСУ" },
+            { key: "organs", icon: "Network", label: "Органы ЕЦСУ" },
           ] as { key: NavTab; icon: string; label: string }[]).map((item) => (
             <button key={item.key} onClick={() => setActiveTab(item.key)}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all w-full text-left"
@@ -353,7 +353,7 @@ export default function EgsuDashboard() {
                 ))}
               </div>
               <div className="p-5 rounded-2xl" style={{ background: "rgba(0,255,135,0.04)", border: "1px solid rgba(0,255,135,0.1)" }}>
-                <h3 className="font-display text-sm font-semibold text-white/70 uppercase tracking-wider mb-3">Принципы использования ИИ (ЕГСУ 2.0)</h3>
+                <h3 className="font-display text-sm font-semibold text-white/70 uppercase tracking-wider mb-3">Принципы использования ИИ (ЕЦСУ 2.0)</h3>
                 <div className="grid md:grid-cols-2 gap-2">
                   {["Прозрачность: открытый исходный код алгоритмов", "Подотчётность: чёткая ответственность за ошибки", "Этика: запрет на слежку и дискриминацию", "Безопасность: многоуровневая защита данных", "Инклюзивность: поддержка разных языков", "Гибкость: возможность перехода на ручное управление"].map((p) => (
                     <div key={p} className="flex items-start gap-2 text-xs text-white/50">
@@ -370,7 +370,7 @@ export default function EgsuDashboard() {
           {activeTab === "organs" && (
             <div className="space-y-5 animate-fade-up">
               <div>
-                <h1 className="font-display text-2xl font-bold text-white uppercase">Органы ЕГСУ</h1>
+                <h1 className="font-display text-2xl font-bold text-white uppercase">Органы ЕЦСУ</h1>
                 <p className="text-white/30 text-sm mt-0.5">Структура системы управления</p>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
@@ -402,9 +402,9 @@ export default function EgsuDashboard() {
           )}
 
           <div className="mt-8 text-center space-y-1">
-            <p className="text-white/15 text-[10px]">© 13 апреля 2026 · ЕГСУ 2.0 · Все права защищены</p>
+            <p className="text-white/15 text-[10px]">© 13 апреля 2026 · ЕЦСУ 2.0 · Все права защищены</p>
             <p className="text-white/10 text-[10px]">Правообладатель и контрольный пакет акций: Николаев Владимир Владимирович</p>
-            <p className="text-white/10 text-[10px]">Разработка: Poehali.dev · Партнёрская программа ЕГСУ</p>
+            <p className="text-white/10 text-[10px]">Разработка: Poehali.dev · Партнёрская программа ЕЦСУ</p>
           </div>
         </main>
       </div>

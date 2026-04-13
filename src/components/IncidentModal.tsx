@@ -41,7 +41,7 @@ const RECOMMENDATIONS: Record<string, Action[]> = {
       icon: "FileText",
       color: "#a855f7",
       autoApply: true,
-      legalBasis: "Процедурные нормы ЕГСУ, раздел 3.2",
+      legalBasis: "Процедурные нормы ЕЦСУ, раздел 3.2",
     },
     {
       id: "monitor",
@@ -50,7 +50,7 @@ const RECOMMENDATIONS: Record<string, Action[]> = {
       icon: "Satellite",
       color: "#3b82f6",
       autoApply: true,
-      legalBasis: "Протокол ЕГСУ по мониторингу, п. 7",
+      legalBasis: "Протокол ЕЦСУ по мониторингу, п. 7",
     },
     {
       id: "alert_ngos",
@@ -79,7 +79,7 @@ const RECOMMENDATIONS: Record<string, Action[]> = {
       icon: "AlertTriangle",
       color: "#f43f5e",
       autoApply: true,
-      legalBasis: "Протокол защиты населения ЕГСУ, ст. 8",
+      legalBasis: "Протокол защиты населения ЕЦСУ, ст. 8",
     },
     {
       id: "pollution_source",
@@ -93,7 +93,7 @@ const RECOMMENDATIONS: Record<string, Action[]> = {
     {
       id: "media_release",
       label: "Публичный пресс-релиз",
-      description: "Подготовить официальный пресс-релиз ЕГСУ для открытого информирования общества",
+      description: "Подготовить официальный пресс-релиз ЕЦСУ для открытого информирования общества",
       icon: "Newspaper",
       color: "#00ff87",
       autoApply: false,
@@ -117,7 +117,7 @@ const RECOMMENDATIONS: Record<string, Action[]> = {
       icon: "Heart",
       color: "#f43f5e",
       autoApply: true,
-      legalBasis: "Протокол охраны здоровья ВОЗ / ЕГСУ",
+      legalBasis: "Протокол охраны здоровья ВОЗ / ЕЦСУ",
     },
     {
       id: "source_inspection",
@@ -146,7 +146,7 @@ const RECOMMENDATIONS: Record<string, Action[]> = {
       icon: "Network",
       color: "#a855f7",
       autoApply: true,
-      legalBasis: "Протокол кибербезопасности ЕГСУ, раздел 5",
+      legalBasis: "Протокол кибербезопасности ЕЦСУ, раздел 5",
     },
     {
       id: "cert_notify",
@@ -322,7 +322,7 @@ export default function IncidentModal({ incident, onClose }: Props) {
                     <span className="text-white/30 font-mono">{entry.time}</span>
                     <Icon name="CheckCircle" size={12} style={{ color: "#00ff87" }} />
                     <span className="text-white/60">{entry.label}</span>
-                    <span className="ml-auto text-white/20">системой ЕГСУ</span>
+                    <span className="ml-auto text-white/20">системой ЕЦСУ</span>
                   </div>
                 ))}
               </div>
@@ -334,7 +334,7 @@ export default function IncidentModal({ incident, onClose }: Props) {
             <Icon name="Scale" size={14} style={{ color: "#a855f7" }} className="mt-0.5 flex-shrink-0" />
             <p className="text-white/40 text-xs leading-relaxed">
               Все автоматические действия выполняются строго в рамках международного права и публичных процедур.
-              Принудительные меры требуют подтверждения уполномоченного координатора ЕГСУ.
+              Принудительные меры требуют подтверждения уполномоченного координатора ЕЦСУ.
             </p>
           </div>
         </div>

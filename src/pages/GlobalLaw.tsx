@@ -63,7 +63,7 @@ export default function GlobalLaw() {
           </div>
           <div>
             <div className="font-display text-base font-bold text-white tracking-wide leading-none">ГЛОБАЛЬНЫЙ ЗАКОН</div>
-            <div className="text-white/30 text-[10px]">ЕГСУ 2.0 · Lite</div>
+            <div className="text-white/30 text-[10px]">ЕЦСУ 2.0 · Lite</div>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -291,7 +291,7 @@ export default function GlobalLaw() {
 
             <div className="mt-4 text-center">
               <p className="text-white/20 text-[10px]">© 2024 Николаев Владимир Владимирович</p>
-              <p className="text-white/15 text-[10px]">Все права защищены · ЕГСУ 2.0</p>
+              <p className="text-white/15 text-[10px]">Все права защищены · ЕЦСУ 2.0</p>
             </div>
           </div>
         </div>

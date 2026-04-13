@@ -107,7 +107,7 @@ export default function EgsuReport() {
       }
       setResult(data);
     } catch {
-      setError("Ошибка соединения с сервером ЕГСУ. Попробуйте ещё раз.");
+      setError("Ошибка соединения с сервером ЕЦСУ. Попробуйте ещё раз.");
     }
     setLoading(false);
   };
@@ -135,7 +135,7 @@ export default function EgsuReport() {
 
           {/* Номер */}
           <div className="p-4 rounded-2xl mb-4" style={{ background: isVerified ? "rgba(0,255,135,0.06)" : "rgba(245,158,11,0.06)", border: `1px solid ${isVerified ? "rgba(0,255,135,0.15)" : "rgba(245,158,11,0.15)"}` }}>
-            <div className="text-white/40 text-xs mb-1">Номер инцидента в системе ЕГСУ</div>
+            <div className="text-white/40 text-xs mb-1">Номер инцидента в системе ЕЦСУ</div>
             <div className="font-display text-2xl font-bold" style={{ color: isVerified ? "#00ff87" : "#f59e0b" }}>{inc.incident_code}</div>
             <div className="text-white/30 text-xs mt-1">Сохраните для отслеживания</div>
           </div>
@@ -182,7 +182,7 @@ export default function EgsuReport() {
         </button>
         <div className="flex-1">
           <div className="font-display text-base font-bold text-white leading-none">Сообщить о нарушении</div>
-          <div className="text-white/30 text-[10px]">ЕГСУ 2.0 · Шаг {step} из 4</div>
+          <div className="text-white/30 text-[10px]">ЕЦСУ 2.0 · Шаг {step} из 4</div>
         </div>
         <div className="flex gap-1.5">
           {[1, 2, 3, 4].map(n => (
@@ -304,7 +304,7 @@ export default function EgsuReport() {
           <div className="space-y-5 animate-fade-up">
             <div className="pt-4">
               <h2 className="font-display text-xl font-bold text-white uppercase">Доказательства</h2>
-              <p className="text-white/40 text-sm mt-1">Система ЕГСУ проверяет достоверность. Минимальный балл: 40</p>
+              <p className="text-white/40 text-sm mt-1">Система ЕЦСУ проверяет достоверность. Минимальный балл: 40</p>
             </div>
 
             {/* Балл верификации */}
@@ -398,7 +398,7 @@ export default function EgsuReport() {
           <div className="space-y-4 animate-fade-up">
             <div className="pt-4">
               <h2 className="font-display text-xl font-bold text-white uppercase">Отправка</h2>
-              <p className="text-white/40 text-sm mt-1">Проверьте данные и отправьте в систему ЕГСУ</p>
+              <p className="text-white/40 text-sm mt-1">Проверьте данные и отправьте в систему ЕЦСУ</p>
             </div>
 
             {/* Итоговый балл */}
@@ -449,7 +449,7 @@ export default function EgsuReport() {
 
             <div className="p-3 rounded-xl flex items-start gap-2" style={{ background: "rgba(168,85,247,0.05)", border: "1px solid rgba(168,85,247,0.12)" }}>
               <Icon name="Scale" size={14} style={{ color: "#a855f7" }} className="mt-0.5 shrink-0" />
-              <p className="text-white/40 text-xs">Инцидент будет зарегистрирован в блокчейн-реестре ЕГСУ. Ответственная группа ОГР получит уведомление в течение 2 часов. Расследование — до 7 дней, решение МС — до 14 дней.</p>
+              <p className="text-white/40 text-xs">Инцидент будет зарегистрирован в блокчейн-реестре ЕЦСУ. Ответственная группа ОГР получит уведомление в течение 2 часов. Расследование — до 7 дней, решение МС — до 14 дней.</p>
             </div>
 
             {error && (
@@ -462,7 +462,7 @@ export default function EgsuReport() {
             <button onClick={handleSubmit} disabled={loading || score < 40}
               className="w-full py-4 rounded-xl font-bold text-black text-sm transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               style={{ background: score >= 40 ? "linear-gradient(135deg, #f43f5e, #f59e0b)" : "rgba(255,255,255,0.06)", boxShadow: score >= 40 ? "0 0 30px rgba(244,63,94,0.3)" : "none", color: score >= 40 ? "#000" : "rgba(255,255,255,0.2)" }}>
-              {loading ? <><Icon name="Loader" size={16} className="animate-spin" /> Отправка в ЕГСУ...</> : score < 40 ? "Добавьте больше доказательств" : "Отправить в систему ЕГСУ"}
+              {loading ? <><Icon name="Loader" size={16} className="animate-spin" /> Отправка в ЕЦСУ...</> : score < 40 ? "Добавьте больше доказательств" : "Отправить в систему ЕЦСУ"}
             </button>
 
             {score < 40 && (

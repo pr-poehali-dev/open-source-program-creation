@@ -1,5 +1,5 @@
 """
-Голосовой модуль ЕГСУ — Яндекс SpeechKit
+Голосовой модуль ЕЦСУ — Яндекс SpeechKit
 Речь → текст (STT) и текст → речь (TTS)
 Координатор может голосом управлять дашбордом
 """
@@ -19,7 +19,7 @@ HEADERS_BASE = {
 YANDEX_STT_URL = "https://stt.api.cloud.yandex.net/speech/v1/stt:recognize"
 YANDEX_TTS_URL = "https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize"
 
-# Голосовые команды ЕГСУ
+# Голосовые команды ЕЦСУ
 VOICE_COMMANDS = {
     "критические": {"action": "filter", "value": "critical", "response": "Показываю критические инциденты"},
     "активные": {"action": "filter", "value": "active", "response": "Показываю активные инциденты"},
@@ -30,7 +30,7 @@ VOICE_COMMANDS = {
     "обзор": {"action": "tab", "value": "overview", "response": "Открываю обзор системы"},
     "инциденты": {"action": "tab", "value": "incidents", "response": "Открываю список инцидентов"},
     "аналитика": {"action": "tab", "value": "ai", "response": "Открываю раздел ИИ-аналитики"},
-    "органы": {"action": "tab", "value": "organs", "response": "Открываю органы ЕГСУ"},
+    "органы": {"action": "tab", "value": "organs", "response": "Открываю органы ЕЦСУ"},
     "новый инцидент": {"action": "navigate", "value": "/egsu/report", "response": "Открываю форму подачи инцидента"},
     "подать": {"action": "navigate", "value": "/egsu/report", "response": "Открываю форму подачи инцидента"},
     "главная": {"action": "navigate", "value": "/egsu", "response": "Возвращаю на главную страницу"},
