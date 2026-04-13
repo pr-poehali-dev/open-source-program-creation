@@ -6,6 +6,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
+import GlobalLaw from "./pages/GlobalLaw";
+import EgsuDashboard from "./pages/EgsuDashboard";
+import EgsuReport from "./pages/EgsuReport";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,6 +22,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/app" element={<Dashboard />} />
+          <Route path="/egsu" element={<GlobalLaw />} />
+          <Route path="/egsu/dashboard" element={<EgsuDashboard />} />
+          <Route path="/egsu/report" element={<EgsuReport />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
