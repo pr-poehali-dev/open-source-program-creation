@@ -10,6 +10,7 @@ const REG_NUM = "ЕЦСУ-2026-001";
 
 const DOCS = [
   { id: "copyright", icon: "FileText", color: "#00ff87", label: "Свидетельство об авторском праве" },
+  { id: "modification", icon: "GitBranch", color: "#e879f9", label: "Право на модификацию и гибридное моделирование" },
   { id: "fips", icon: "Stamp", color: "#06b6d4", label: "Заявка в Роспатент (ФИПС)" },
   { id: "mincifra", icon: "Building2", color: "#f97316", label: "Заявка в реестр Минцифры" },
   { id: "payment", icon: "CreditCard", color: "#10b981", label: "Настройка платёжной системы" },
@@ -101,6 +102,123 @@ function DocCopyright() {
 
       <div className="mt-6 text-center text-xs text-gray-400">
         Дата составления: {TODAY} · {REG_NUM}
+      </div>
+    </div>
+  );
+}
+
+function DocModification() {
+  return (
+    <div className="doc-print">
+      <div className="text-center mb-8">
+        <div className="text-xs uppercase tracking-widest text-gray-500 mb-1">Российская Федерация</div>
+        <h1 className="text-2xl font-bold uppercase">Право на модификацию и гибридное моделирование</h1>
+        <div className="text-sm text-gray-500 mt-1">программного обеспечения «{APP}»</div>
+        <div className="mt-3 text-lg font-semibold border-b-2 border-black pb-2 inline-block px-8">№ ЕЦСУ-2026-MOD-001</div>
+      </div>
+
+      <p className="mb-4 leading-relaxed">
+        Настоящий документ подтверждает, что программное обеспечение <strong>«{APP}»</strong>,
+        правообладателем которого является <strong>{OWNER}</strong>, имеет официально
+        зафиксированное право на модификацию, адаптацию и применение гибридных видов
+        моделирования в соответствии с действующим законодательством.
+      </p>
+
+      <div className="border border-gray-300 rounded p-4 mb-6 bg-gray-50">
+        <table className="w-full text-sm">
+          <tbody>
+            {[
+              ["Наименование ПО", APP],
+              ["Правообладатель", OWNER],
+              ["Дата регистрации права", TODAY],
+              ["Номер документа", "ЕЦСУ-2026-MOD-001"],
+              ["Тип права", "Право на модификацию и гибридное моделирование"],
+              ["Правовое основание", "ГК РФ ст. 1261, 1266, 1280"],
+            ].map(([k, v]) => (
+              <tr key={k} className="border-b border-gray-200 last:border-0">
+                <td className="py-2 pr-4 text-gray-500 font-medium w-1/3">{k}</td>
+                <td className="py-2 font-semibold">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="mb-6">
+        <h3 className="font-bold mb-3 text-lg">1. Право на модификацию</h3>
+        <p className="text-sm leading-relaxed text-gray-700 mb-3">
+          Правообладатель оставляет за собой исключительное право вносить любые изменения
+          в архитектуру, функциональность, пользовательский интерфейс и логику программного
+          обеспечения «{APP}», включая:
+        </p>
+        <ul className="text-sm text-gray-700 space-y-2 list-disc list-inside">
+          <li>Добавление новых модулей и компонентов системы</li>
+          <li>Изменение алгоритмов обработки и верификации данных</li>
+          <li>Расширение интеграций с внешними сервисами и API</li>
+          <li>Адаптацию интерфейса под новые требования и устройства</li>
+          <li>Оптимизацию и рефакторинг программного кода</li>
+        </ul>
+      </div>
+
+      <div className="mb-6">
+        <h3 className="font-bold mb-3 text-lg">2. Право на гибридное моделирование</h3>
+        <p className="text-sm leading-relaxed text-gray-700 mb-3">
+          Программное обеспечение имеет право применять гибридные виды моделирования,
+          сочетающие различные подходы и технологии:
+        </p>
+        <div className="grid grid-cols-1 gap-3 text-sm">
+          {[
+            { title: "ИИ-моделирование", desc: "Применение моделей машинного обучения и нейронных сетей для предсказания инцидентов и анализа угроз" },
+            { title: "Геопространственное моделирование", desc: "Интеграция спутниковых данных и ГИС-систем для визуализации и анализа географических объектов" },
+            { title: "Статистическое моделирование", desc: "Обработка массивов данных для выявления закономерностей и построения прогностических моделей" },
+            { title: "Сценарное моделирование", desc: "Разработка и тестирование различных сценариев реагирования на инциденты и кризисные ситуации" },
+            { title: "Гибридные архитектурные модели", desc: "Комбинирование монолитной и микросервисной архитектур для обеспечения масштабируемости системы" },
+          ].map((item) => (
+            <div key={item.title} className="border border-gray-200 rounded p-3 bg-white">
+              <div className="font-semibold text-gray-800 mb-1">{item.title}</div>
+              <div className="text-gray-600">{item.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <h3 className="font-bold mb-3 text-lg">3. Ограничения и условия</h3>
+        <p className="text-sm leading-relaxed text-gray-700">
+          Любые модификации и применение гибридных моделей осуществляются исключительно
+          правообладателем или уполномоченными им лицами. Партнёр (Poehali.dev) вправе
+          производить технические изменения только по письменному согласованию с правообладателем
+          в рамках Партнёрского соглашения № ЕЦСУ-2026-001.
+        </p>
+      </div>
+
+      <div className="mb-6">
+        <h3 className="font-bold mb-3 text-lg">4. Отражение в реестре</h3>
+        <p className="text-sm leading-relaxed text-gray-700">
+          Настоящее право зарегистрировано в реестре программного обеспечения системы ЕЦСУ 2.0
+          и подлежит отражению в государственном реестре программ для ЭВМ Федерального института
+          промышленной собственности (ФИПС) при Роспатенте.
+        </p>
+      </div>
+
+      <div className="mt-12 grid grid-cols-2 gap-8">
+        <div className="text-center">
+          <div className="border-t-2 border-black pt-2 text-sm">
+            <div>Правообладатель</div>
+            <div className="font-bold mt-1">{OWNER}</div>
+            <div className="text-gray-400 text-xs mt-4">подпись / дата</div>
+          </div>
+        </div>
+        <div className="text-center">
+          <div className="border-t-2 border-black pt-2 text-sm">
+            <div>Место для печати</div>
+            <div className="mt-6 text-gray-300 text-xs border border-dashed border-gray-300 rounded h-16 flex items-center justify-center">М.П.</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6 text-center text-xs text-gray-400">
+        Дата составления: {TODAY} · № ЕЦСУ-2026-MOD-001
       </div>
     </div>
   );
@@ -1100,6 +1218,7 @@ function DocPayment() {
 
 const DOC_COMPONENTS: Record<string, () => JSX.Element> = {
   copyright: DocCopyright,
+  modification: DocModification,
   fips: DocFips,
   mincifra: DocMincifra,
   payment: DocPayment,
