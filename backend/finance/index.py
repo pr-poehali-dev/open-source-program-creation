@@ -1,9 +1,12 @@
 """
-Финансовый модуль ЕЦСУ 2.0 — управление счетами, картами, транзакциями и правилами распределения.
+Финансовый модуль ЕЦСУ 2.0 — управление счетами, картами, транзакциями, правилами,
+аналитикой, уведомлениями, профилем и настройками владельца.
 """
 import json
 import os
+import hashlib
 import psycopg2
+from datetime import datetime
 
 S = "t_p38294978_open_source_program_"
 CORS = {
@@ -339,5 +342,213 @@ def handler(event: dict, context) -> dict:
         db.commit()
         return ok({"message": f"Вывод ${amount:.2f} исполнен успешно.",
                    "amount": amount, "currency": currency})
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # АНАЛИТИКА
+    # ══════════════════════════════════════════════════════════════════════════
+
+    if method == "GET" and "/analytics" in path and "/snapshots" not in path and "/export" not in path:
+        cur.execute(f"SELECT COALESCE(SUM(balance),0) FROM {S}.egsu_finance_accounts WHERE is_active=true AND currency='USD'")
+        total_balance = float(cur.fetchone()[0])
+        cur.execute(f"SELECT COALESCE(SUM(amount),0) FROM {S}.egsu_finance_transactions WHERE tx_type='income' AND currency='USD'")
+        total_income = float(cur.fetchone()[0])
+        cur.execute(f"SELECT COALESCE(SUM(amount),0) FROM {S}.egsu_finance_transactions WHERE tx_type='outcome' AND currency='USD'")
+        total_outcome = float(cur.fetchone()[0])
+        cur.execute(f"SELECT balance FROM {S}.egsu_finance_accounts WHERE account_number='EGSU-ABS-9999'")
+        row = cur.fetchone()
+        absorption = float(row[0]) if row else 0
+        cur.execute(f"SELECT COUNT(*) FROM {S}.egsu_security_events")
+        total_events = cur.fetchone()[0]
+        cur.execute(f"SELECT COALESCE(SUM(penalty_amount),0) FROM {S}.egsu_security_events")
+        total_penalties = float(cur.fetchone()[0])
+        cur.execute(f"SELECT COUNT(*) FROM {S}.egsu_blocked_ips")
+        blocked_ips = cur.fetchone()[0]
+        # Динамика по дням
+        cur.execute(f"""
+            SELECT DATE(created_at) as day,
+                   SUM(CASE WHEN tx_type='income' THEN amount ELSE 0 END) as income,
+                   SUM(CASE WHEN tx_type='outcome' THEN amount ELSE 0 END) as outcome
+            FROM {S}.egsu_finance_transactions
+            WHERE created_at >= NOW() - INTERVAL '30 days' AND currency='USD'
+            GROUP BY day ORDER BY day
+        """)
+        daily = [{"date": str(r[0]), "income": float(r[1]), "outcome": float(r[2])} for r in cur.fetchall()]
+        # Атаки по дням
+        cur.execute(f"""
+            SELECT DATE(created_at) as day, COUNT(*) as events, COALESCE(SUM(penalty_amount),0) as penalties
+            FROM {S}.egsu_security_events
+            WHERE created_at >= NOW() - INTERVAL '30 days'
+            GROUP BY day ORDER BY day
+        """)
+        attack_daily = [{"date": str(r[0]), "events": r[1], "penalties": float(r[2])} for r in cur.fetchall()]
+        # Распределение по счетам
+        cur.execute(f"SELECT label, balance, currency FROM {S}.egsu_finance_accounts WHERE is_active=true ORDER BY balance DESC")
+        accounts_dist = [{"label": r[0], "balance": float(r[1]), "currency": r[2]} for r in cur.fetchall()]
+        # Топ транзакций
+        cur.execute(f"""
+            SELECT t.tx_type, t.amount, t.currency, t.description, t.created_at, a.label
+            FROM {S}.egsu_finance_transactions t
+            JOIN {S}.egsu_finance_accounts a ON a.id=t.account_id
+            ORDER BY t.amount DESC LIMIT 10
+        """)
+        top_tx = [{"tx_type": r[0], "amount": float(r[1]), "currency": r[2],
+                   "description": r[3], "created_at": str(r[4]), "account": r[5]} for r in cur.fetchall()]
+        # Атаки по типам
+        cur.execute(f"""
+            SELECT event_type, COUNT(*) as cnt, COALESCE(SUM(penalty_amount),0) as total_penalty
+            FROM {S}.egsu_security_events GROUP BY event_type ORDER BY cnt DESC
+        """)
+        attack_types = [{"type": r[0], "count": r[1], "penalty": float(r[2])} for r in cur.fetchall()]
+        return ok({
+            "finance": {"total_balance_usd": total_balance, "total_income_usd": total_income,
+                        "total_outcome_usd": total_outcome, "net_usd": total_income - total_outcome,
+                        "absorption_balance": absorption},
+            "security": {"total_events": total_events, "total_penalties_usd": total_penalties, "blocked_ips": blocked_ips},
+            "charts": {"daily_finance": daily, "daily_attacks": attack_daily,
+                       "accounts_distribution": accounts_dist, "top_transactions": top_tx, "attack_types": attack_types},
+        })
+
+    if method == "GET" and "/analytics/export" in path:
+        cur.execute(f"""
+            SELECT id, owner_name, account_type, account_number, bank_name, currency, label, balance, created_at
+            FROM {S}.egsu_finance_accounts WHERE is_active=true ORDER BY id
+        """)
+        accs = [{"id":r[0],"owner_name":r[1],"type":r[2],"number":r[3],"bank":r[4],"currency":r[5],"label":r[6],"balance":float(r[7]),"created_at":str(r[8])} for r in cur.fetchall()]
+        cur.execute(f"""
+            SELECT t.id, t.tx_type, t.amount, t.currency, t.description, t.source, t.status, t.created_at, a.label
+            FROM {S}.egsu_finance_transactions t JOIN {S}.egsu_finance_accounts a ON a.id=t.account_id
+            ORDER BY t.created_at DESC LIMIT 500
+        """)
+        txs = [{"id":r[0],"type":r[1],"amount":float(r[2]),"currency":r[3],"description":r[4],"source":r[5],"status":r[6],"created_at":str(r[7]),"account":r[8]} for r in cur.fetchall()]
+        cur.execute(f"""
+            SELECT id, event_type, severity, ip_address, description, penalty_amount, is_blocked, created_at
+            FROM {S}.egsu_security_events ORDER BY created_at DESC
+        """)
+        sec = [{"id":r[0],"type":r[1],"severity":r[2],"ip":r[3],"description":r[4],"penalty":float(r[5]),"blocked":r[6],"created_at":str(r[7])} for r in cur.fetchall()]
+        return ok({"exported_at": datetime.now().isoformat(), "system": "ЕЦСУ 2.0", "version": "2026",
+                   "accounts": accs, "transactions": txs, "security_events": sec,
+                   "summary": {"accounts": len(accs), "transactions": len(txs), "security_events": len(sec)}})
+
+    if method == "POST" and "/analytics/snapshot" in path:
+        cur.execute(f"SELECT COALESCE(SUM(balance),0) FROM {S}.egsu_finance_accounts WHERE is_active=true AND currency='USD'")
+        tb = float(cur.fetchone()[0])
+        cur.execute(f"SELECT COALESCE(SUM(amount),0) FROM {S}.egsu_finance_transactions WHERE tx_type='income' AND currency='USD'")
+        ti = float(cur.fetchone()[0])
+        cur.execute(f"SELECT COALESCE(SUM(amount),0) FROM {S}.egsu_finance_transactions WHERE tx_type='outcome' AND currency='USD'")
+        to_ = float(cur.fetchone()[0])
+        cur.execute(f"SELECT balance FROM {S}.egsu_finance_accounts WHERE account_number='EGSU-ABS-9999'")
+        r = cur.fetchone(); ab = float(r[0]) if r else 0
+        cur.execute(f"SELECT COUNT(*) FROM {S}.egsu_security_events"); sc = cur.fetchone()[0]
+        cur.execute(f"SELECT COALESCE(SUM(penalty_amount),0) FROM {S}.egsu_security_events"); pen = float(cur.fetchone()[0])
+        cur.execute(f"SELECT COUNT(*) FROM {S}.egsu_finance_accounts WHERE is_active=true"); ac = cur.fetchone()[0]
+        cur.execute(f"""
+            INSERT INTO {S}.egsu_analytics_snapshots
+              (total_balance_usd,total_income_usd,total_outcome_usd,absorption_balance,
+               security_events_count,penalties_collected,active_accounts)
+            VALUES (%s,%s,%s,%s,%s,%s,%s) RETURNING id
+        """, (tb, ti, to_, ab, sc, pen, ac))
+        snap_id = cur.fetchone()[0]
+        db.commit()
+        return ok({"id": snap_id, "message": "Снапшот создан"}, 201)
+
+    if method == "GET" and "/analytics/snapshots" in path:
+        cur.execute(f"""
+            SELECT id, snapshot_date, total_balance_usd, total_income_usd, total_outcome_usd,
+                   absorption_balance, security_events_count, penalties_collected, active_accounts, created_at
+            FROM {S}.egsu_analytics_snapshots ORDER BY created_at DESC LIMIT 30
+        """)
+        cols = ["id","date","total_balance","total_income","total_outcome","absorption","sec_events","penalties","accounts","created_at"]
+        result = [dict(zip(cols, r)) for r in cur.fetchall()]
+        for row in result:
+            for k in ["total_balance","total_income","total_outcome","absorption","penalties"]:
+                row[k] = float(row[k]) if row[k] else 0
+        return ok(result)
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # ВЛАДЕЛЕЦ / НАСТРОЙКИ / УВЕДОМЛЕНИЯ
+    # ══════════════════════════════════════════════════════════════════════════
+
+    if method == "GET" and "/owner" in path and "/settings" not in path and "/access-log" not in path:
+        cur.execute(f"SELECT setting_key, setting_value, setting_type, description FROM {S}.egsu_owner_settings ORDER BY setting_key")
+        settings = {r[0]: {"value": r[1], "type": r[2], "description": r[3]} for r in cur.fetchall()}
+        cur.execute(f"SELECT COUNT(*) FROM {S}.egsu_notifications WHERE is_read=false")
+        unread = cur.fetchone()[0]
+        cur.execute(f"SELECT COUNT(*) FROM {S}.egsu_security_events WHERE created_at >= NOW() - INTERVAL '24 hours'")
+        threats_today = cur.fetchone()[0]
+        cur.execute(f"SELECT COUNT(*) FROM {S}.egsu_finance_transactions WHERE created_at >= NOW() - INTERVAL '24 hours'")
+        tx_today = cur.fetchone()[0]
+        cur.execute(f"SELECT action, ip_address, created_at FROM {S}.egsu_access_log ORDER BY created_at DESC LIMIT 5")
+        last_access = [{"action": r[0], "ip": r[1], "at": str(r[2])} for r in cur.fetchall()]
+        return ok({"owner_name": settings.get("owner_display_name",{}).get("value","Владелец"),
+                   "system_name": settings.get("system_name",{}).get("value","ЕЦСУ 2.0"),
+                   "settings": settings,
+                   "stats": {"unread_notifications": unread, "threats_today": threats_today, "transactions_today": tx_today},
+                   "last_access": last_access})
+
+    if method == "GET" and "/owner/settings" in path:
+        cur.execute(f"SELECT setting_key, setting_value, setting_type, description, updated_at FROM {S}.egsu_owner_settings ORDER BY setting_key")
+        return ok([{"key":r[0],"value":r[1],"type":r[2],"description":r[3],"updated_at":str(r[4])} for r in cur.fetchall()])
+
+    if method == "PUT" and "/owner/settings" in path:
+        key = body.get("key","").strip()
+        value = str(body.get("value",""))
+        if not key: return err("key обязателен")
+        cur.execute(f"UPDATE {S}.egsu_owner_settings SET setting_value=%s, updated_at=NOW() WHERE setting_key=%s", (value, key))
+        if cur.rowcount == 0:
+            cur.execute(f"INSERT INTO {S}.egsu_owner_settings (setting_key, setting_value, setting_type) VALUES (%s,%s,'string')", (key, value))
+        db.commit()
+        return ok({"message": f"Настройка '{key}' обновлена"})
+
+    if method == "GET" and "/owner/access-log" in path:
+        cur.execute(f"SELECT id, action, ip_address, user_agent, details, created_at FROM {S}.egsu_access_log ORDER BY created_at DESC LIMIT 100")
+        return ok([{"id":r[0],"action":r[1],"ip":r[2],"ua":r[3],"details":r[4],"at":str(r[5])} for r in cur.fetchall()])
+
+    if method == "GET" and "/notifications" in path and "/read" not in path:
+        cur.execute(f"""
+            SELECT id, type, priority, title, body, source, is_read, action_url, created_at
+            FROM {S}.egsu_notifications ORDER BY created_at DESC LIMIT 50
+        """)
+        cols = ["id","type","priority","title","body","source","is_read","action_url","created_at"]
+        return ok(rows(cur, cols))
+
+    if method == "POST" and "/notifications" in path and "/read" not in path:
+        title = body.get("title","").strip()
+        if not title: return err("title обязателен")
+        cur.execute(f"""
+            INSERT INTO {S}.egsu_notifications (type, priority, title, body, source, action_url)
+            VALUES (%s,%s,%s,%s,%s,%s) RETURNING id
+        """, (body.get("type","system"), body.get("priority","normal"), title,
+              body.get("body",""), body.get("source","EGSU"), body.get("action_url","")))
+        new_id = cur.fetchone()[0]
+        db.commit()
+        return ok({"id": new_id, "message": "Уведомление создано"}, 201)
+
+    if method == "PUT" and "/notifications/" in path and "/read" in path:
+        nid = int(path.split("/notifications/")[1].split("/")[0])
+        cur.execute(f"UPDATE {S}.egsu_notifications SET is_read=true WHERE id=%s", (nid,))
+        db.commit()
+        return ok({"message": "Прочитано"})
+
+    if method == "PUT" and "/notifications/read-all" in path:
+        cur.execute(f"UPDATE {S}.egsu_notifications SET is_read=true WHERE is_read=false")
+        count = cur.rowcount
+        db.commit()
+        return ok({"message": f"Отмечено прочитанными: {count}"})
+
+    if method == "POST" and "/recovery" in path:
+        reason = body.get("reason","")
+        token = hashlib.sha256(f"EGSU-RECOVERY-{datetime.now().isoformat()}".encode()).hexdigest()[:16].upper()
+        headers_ev = event.get("headers") or {}
+        client_ip = headers_ev.get("x-forwarded-for", "unknown")
+        cur.execute(f"""
+            INSERT INTO {S}.egsu_access_log (action, ip_address, details)
+            VALUES ('recovery_requested',%s,%s)
+        """, (client_ip, json.dumps({"reason": reason})))
+        cur.execute(f"""
+            INSERT INTO {S}.egsu_notifications (type, priority, title, body, source)
+            VALUES ('system','critical','Запрос восстановления доступа',%s,'Recovery Module')
+        """, (f"Запрос с IP {client_ip}. Причина: {reason}",))
+        db.commit()
+        return ok({"message": "Запрос зафиксирован. Свяжитесь с администратором.", "token_prefix": token[:4]})
 
     return err("Маршрут не найден", 404)
