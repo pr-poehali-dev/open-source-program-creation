@@ -67,7 +67,7 @@ export default function FinanceLayout({
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-3"
         style={{ background: "rgba(6,10,18,0.97)", borderBottom: "1px solid rgba(0,255,135,0.15)", backdropFilter: "blur(20px)" }}>
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate("/egsu/dashboard")} className="text-white/40 hover:text-white/70 transition-colors">
+          <button onClick={() => navigate("/ezsu/dashboard")} className="text-white/40 hover:text-white/70 transition-colors">
             <Icon name="ChevronLeft" size={16} />
           </button>
           <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: G("#00ff87, #3b82f6") }}>
