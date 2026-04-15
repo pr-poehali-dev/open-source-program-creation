@@ -20,7 +20,7 @@ CORS = {
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent"
 
 # Системный промпт — личность ассистента
-SYSTEM_PROMPT = """Ты — умный ИИ-ассистент системы ЕЦСУ 2.0 (Единая Центральная Система Управления).
+SYSTEM_PROMPT = """Ты — умный ИИ-ассистент системы ЕЦСУ 2.0 (Единая Центральная Система Управления), интегрированный с модулем ЦПВОА.
 
 О себе:
 - Ты интеллектуальный помощник проекта ЕЦСУ 2.0, созданного Николаевым Владимиром Владимировичем
@@ -34,6 +34,21 @@ SYSTEM_PROMPT = """Ты — умный ИИ-ассистент системы Е
 - Юридические консультации и рекомендации
 - Квалификация правонарушений
 - Международное право (Женевские конвенции, Римский статут, Будапештская конвенция)
+
+Модуль ЦПВОА (Центральная Платформа Всеканального Обнаружения Аномалий):
+- ЦПВОА — встроенный модуль мониторинга аномалий в реальном времени
+- Источники данных ЦПВОА: радиоэфир (FM/AM), оптические датчики (Li-Fi/камеры), меш-сети
+- Форматы запросов к ЦПВОА: "ЦПВОА: проверить аномалии на частоте X МГц", "ЦПВОА: анализ световых сигналов", "ЦПВОА: статус меш-узлов"
+- Уровни угроз ЦПВОА: низкий (зелёный), средний (жёлтый), высокий (оранжевый), критический (красный)
+- Режимы ЦПВОА: стандартный, расширенный, экстренный (SOS), офлайн
+- При получении данных от ЦПВОА: анализируй аномалии, определяй правовую квалификацию, давай рекомендации по реагированию
+
+Если пользователь передаёт данные ЦПВОА (инциденты, аномалии, статус датчиков):
+1. Сначала кратко подтверди: "Получены данные ЦПВОА: [краткое резюме]"
+2. Проанализируй каждый инцидент: категория, угроза, возможные причины
+3. Укажи правовую квалификацию (какие нормы нарушены / требуют реагирования)
+4. Дай конкретные рекомендации по реагированию с приоритетами
+5. Предложи варианты дальнейших запросов к ЦПВОА
 
 Правила ответов:
 1. Всегда заканчивай ответ предложением 3 кратких вариантов продолжения диалога в формате JSON-блока
@@ -229,11 +244,35 @@ def handler(event: dict, context) -> dict:
         user_message = body.get("message", "").strip()
         session_id = body.get("session_id", "default")
         history = body.get("history", [])  # история с фронтенда
+        cpvoa_context = body.get("cpvoa_context")  # данные из модуля ЦПВОА
 
         if not user_message:
             return err("message обязателен")
 
         api_key = os.environ.get("GEMINI_API_KEY", "")
+
+        # Если переданы данные ЦПВОА — формируем контекстный блок
+        cpvoa_block = ""
+        if cpvoa_context and isinstance(cpvoa_context, dict):
+            incidents = cpvoa_context.get("incidents", [])
+            sensors = cpvoa_context.get("sensors", {})
+            connection = cpvoa_context.get("connection", "unknown")
+            mode = cpvoa_context.get("mode", "standard")
+            query = cpvoa_context.get("query", "")
+
+            lines = ["[ДАННЫЕ ЦПВОА — СИНХРОНИЗАЦИЯ]"]
+            lines.append(f"Режим: {mode} | Связь: {connection}")
+            if sensors:
+                active = [k for k, v in sensors.items() if v]
+                lines.append(f"Активные датчики: {', '.join(active) if active else 'нет'}")
+            if query:
+                lines.append(f"Последний запрос ЦПВОА: {query}")
+            if incidents:
+                lines.append(f"Зафиксировано инцидентов: {len(incidents)}")
+                for inc in incidents[:4]:
+                    lines.append(f"  • [{inc.get('threat','?').upper()}] {inc.get('category','?')} — {inc.get('description','')[:100]} (источник: {inc.get('source','?')}, геолокация: {inc.get('location','?')})")
+            lines.append("[КОНЕЦ ДАННЫХ ЦПВОА]")
+            cpvoa_block = "\n".join(lines)
 
         # Строим контекст диалога
         messages = []
@@ -246,8 +285,9 @@ def handler(event: dict, context) -> dict:
                     "content": msg["content"]
                 })
 
-        # Добавляем текущее сообщение
-        messages.append({"role": "user", "content": user_message})
+        # Добавляем текущее сообщение (с контекстом ЦПВОА если есть)
+        full_message = f"{cpvoa_block}\n\n{user_message}" if cpvoa_block else user_message
+        messages.append({"role": "user", "content": full_message})
 
         # Вызываем Gemini
         if api_key:

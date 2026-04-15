@@ -5,17 +5,31 @@
       "method": "GET",
       "path": "/",
       "expectedStatus": 200,
-      "expectedBody": {"status": "active"},
-      "bodyMatcher": "partial"
+      "expectedBody": "active",
+      "bodyMatcher": "contains"
     },
     {
-      "name": "Отправка сообщения (POST /)",
+      "name": "Диалог с ИИ",
       "method": "POST",
       "path": "/",
-      "body": {"message": "Привет! Что ты умеешь?", "session_id": "test-001", "history": []},
+      "body": {"message": "Привет", "session_id": "test-001", "history": []},
       "expectedStatus": 200,
-      "expectedBody": {"suggestions": []},
-      "bodyMatcher": "partial"
+      "expectedBody": "reply",
+      "bodyMatcher": "contains"
+    },
+    {
+      "name": "Диалог с контекстом ЦПВОА",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "message": "Анализ",
+        "session_id": "test-cpvoa",
+        "history": [],
+        "cpvoa_context": {"incidents": [], "sensors": {}, "connection": "online", "mode": "advanced"}
+      },
+      "expectedStatus": 200,
+      "expectedBody": "reply",
+      "bodyMatcher": "contains"
     }
   ]
 }

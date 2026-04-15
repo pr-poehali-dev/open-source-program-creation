@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import AiChat, { CpvoaContext } from "@/components/AiChat";
 
 // ─── Типы ────────────────────────────────────────────────────────────────────
 type Mode = "standard" | "advanced" | "emergency" | "offline";
@@ -89,7 +90,22 @@ export default function EgsuCpvoa() {
     "ЦПВОА: статус датчиков",
     "ЦПВОА: инциденты 5 км",
   ]);
+  const [aiChatOpen, setAiChatOpen] = useState(false);
+  const [aiCpvoaCtx, setAiCpvoaCtx] = useState<CpvoaContext | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Открыть ИИ с текущим контекстом ЦПВОА
+  const openAiWithContext = (message?: string) => {
+    const ctx: CpvoaContext = {
+      incidents: results.length > 0 ? results : MOCK_INCIDENTS,
+      sensors,
+      connection,
+      mode,
+      query: queryHistory[0] ?? "",
+    };
+    setAiCpvoaCtx(ctx);
+    setAiChatOpen(true);
+  };
 
   // Детектирование критической угрозы → экстренный режим
   useEffect(() => {
@@ -185,6 +201,13 @@ export default function EgsuCpvoa() {
 
   return (
     <div className="min-h-screen flex flex-col font-[Roboto,sans-serif]" style={{ background: "#2B2B2B", color: "#FFFFFF" }}>
+      {/* ─── ИИ-чат с интеграцией ЦПВОА ─── */}
+      {aiChatOpen && aiCpvoaCtx && (
+        <AiChat
+          onClose={() => setAiChatOpen(false)}
+          initialCpvoaContext={aiCpvoaCtx}
+        />
+      )}
 
       {/* ─── NAV ─── */}
       <nav className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 py-3 gap-3"
@@ -251,6 +274,14 @@ export default function EgsuCpvoa() {
             style={{ background: `${connConfig.color}15`, color: connConfig.color, border: `1px solid ${connConfig.color}30` }}>
             <Icon name={connConfig.icon as "Wifi"} size={13} />
             <span className="hidden sm:block">{connConfig.label}</span>
+          </button>
+
+          {/* ИИ */}
+          <button onClick={() => openAiWithContext()}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold tracking-wider transition-all hover:scale-105"
+            style={{ background: "rgba(168,85,247,0.15)", color: "#a855f7", border: "1px solid rgba(168,85,247,0.3)" }}>
+            <Icon name="Bot" size={13} />
+            ИИ
           </button>
 
           {/* SOS */}
