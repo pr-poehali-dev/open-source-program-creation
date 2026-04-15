@@ -13,6 +13,8 @@ const DOCS = [
   { id: "privacy",      icon: "Shield",     color: "#3b82f6", label: "Политика конфиденциальности" },
   { id: "terms",        icon: "Scale",      color: "#f59e0b", label: "Пользовательское соглашение" },
   { id: "legalization", icon: "Globe",      color: "#f43f5e", label: "Заявление о легализации проекта" },
+  { id: "aihub",        icon: "Bot",        color: "#06b6d4", label: "ТЗ: ИИ‑хаб командный центр" },
+  { id: "grafium",      icon: "BookOpen",   color: "#f59e0b", label: "ТЗ: Ежедневник «Графиум»" },
 ];
 
 type Props = {
@@ -88,8 +90,7 @@ export default function DocsLayout({ activeDoc, setActiveDoc, children }: Props)
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}>
               Правообладатель:<br />
               <span className="text-white/50 font-semibold">Николаев В.В.</span><br />
-              Контрольный пакет: <span className="text-green-400 font-bold">51%</span><br />
-              Партнёр: <span className="text-blue-400">Poehali.dev 49%</span>
+              <span className="text-white/30">Все права защищены · 2026</span>
             </div>
           </div>
         </aside>

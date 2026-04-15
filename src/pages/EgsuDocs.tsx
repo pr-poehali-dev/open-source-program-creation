@@ -636,7 +636,7 @@ function DocFips() {
             </tr>
             <tr>
               <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">2.2. Соавторы / партнёры</td>
-              <td className="border border-gray-400 px-2 py-2">Poehali.dev — технический партнёр-разработчик (49% партнёрский пакет)</td>
+              <td className="border border-gray-400 px-2 py-2 text-gray-400 italic">—</td>
             </tr>
             <tr>
               <td className="border border-gray-400 px-2 py-2 bg-gray-50 font-medium">2.3. Права автора переданы правообладателю?</td>
@@ -694,29 +694,21 @@ function DocFips() {
         <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">
           Раздел IV. Реферат (назначение и функции программы)
         </div>
-        <div className="border border-gray-400 p-3 text-xs leading-relaxed">
-          <p className="mb-2">
-            Программа <strong>«ЕЦСУ 2.0 — Единая Центральная Система Управления»</strong> предназначена
-            для автоматизированного мониторинга, верификации и реагирования на инциденты в сфере
-            экологии, кибербезопасности, прав человека и международного права.
-          </p>
-          <p className="mb-2">
-            <strong>Основные функции программы:</strong>
-          </p>
-          <ul className="list-disc list-inside space-y-1 mb-2">
-            <li>Приём и регистрация сообщений об инцидентах от граждан, НКО и государственных органов</li>
-            <li>Автоматическая верификация достоверности инцидентов по алгоритму МГП (принципы различия, соразмерности, необходимости) с присвоением балла доверия от 0 до 100</li>
-            <li>Формирование рекомендаций по реагированию с указанием правовой основы (международные конвенции, протоколы)</li>
-            <li>Автоматическое применение допустимых мер реагирования (уведомления, мониторинг, запросы)</li>
-            <li>ИИ-ассистент на основе встроенной базы знаний международного права</li>
-            <li>Голосовое управление дашбордом (интеграция Яндекс SpeechKit)</li>
-            <li>Хранение данных в реляционной СУБД PostgreSQL с журналом действий</li>
-            <li>Публичная отчётность в режиме реального времени</li>
-          </ul>
+        <div className="border border-gray-400 p-3 text-xs leading-relaxed space-y-2">
           <p>
-            Программа реализует концепцию цифровой платформы международного управления
-            с опорой на научные данные и ИИ-аналитику согласно Регламенту ЕЦСУ (Раздел 1–7).
+            Программа <strong>«ЕЦСУ 2.0 — Единая Центральная Система Управления»</strong> предназначена для автоматизированного мониторинга, верификации и реагирования на инциденты в сфере: <strong>экологии; кибербезопасности; прав человека; международного права; стратегического развития человечества.</strong>
           </p>
+          <p><strong>Основные функции программы:</strong></p>
+          <p><strong>1. Приём и регистрация сообщений об инцидентах</strong> от: граждан; НКО; государственных органов. Предусмотрена многоуровневая система валидации поступающих данных, включая проверку электронной подписи и геотегирование источника сообщения.</p>
+          <p><strong>2. Автоматическая верификация</strong> достоверности инцидентов по алгоритму МГП (принципы различия, соразмерности, необходимости) с присвоением балла доверия (0–100). Алгоритм учитывает: корреляцию с данными из доверенных источников (спутниковые снимки, датчики экологического мониторинга, базы данных МВД, ВОЗ и др.); лингвистический анализ текста сообщения (выявление признаков фейков, манипулятивных конструкций); сопоставление с историческими данными по региону.</p>
+          <p><strong>3. Формирование рекомендаций по реагированию</strong> с указанием правовой основы: международные конвенции (например, Рамочная конвенция ООН об изменении климата); протоколы и соглашения (Киотский протокол, Парижское соглашение); национальное законодательство (кодексы, федеральные законы, постановления правительства). Рекомендации генерируются с учётом сценария развития инцидента и допустимых мер воздействия.</p>
+          <p><strong>4. Автоматическое применение допустимых мер реагирования:</strong> уведомления заинтересованных органов (МЧС, Роспотребнадзор, местные власти) через интегрированные каналы связи (SMS, email, API госуслуг); мониторинг ситуации в режиме реального времени (анализ потоков данных с датчиков, камер видеонаблюдения, соцсетей); запросы дополнительных данных (автоматический сбор информации у операторов связи, энергетических компаний, транспортных служб).</p>
+          <p><strong>5. ИИ-ассистент</strong> на основе встроенной базы знаний международного права: консультирование операторов по правовым аспектам реагирования; генерация юридических формулировок для официальных документов; поддержка диалога на 10+ языках с использованием моделей машинного перевода.</p>
+          <p><strong>6. Голосовое управление дашбордом</strong> (интеграция с Яндекс SpeechKit): голосовая активация сценариев реагирования; аудиторный обзор ключевых показателей системы; диктовка комментариев и распоряжений с автоматической транскрипцией.</p>
+          <p><strong>7. Хранение данных</strong> в реляционной СУБД PostgreSQL с ведением журнала действий: шифрование чувствительных данных (AES-256); резервное копирование в распределённые хранилища; аудит изменений с фиксацией IP-адреса и учётной записи пользователя.</p>
+          <p><strong>8. Публичная отчётность</strong> в режиме реального времени: интерактивные дашборды с визуализацией статистики; открытые API для интеграции с сайтами госорганов и СМИ; еженедельные отчёты в формате PDF/Excel.</p>
+          <p><strong>9. Дополнительные возможности:</strong> прогнозирование развития инцидентов с использованием моделей машинного обучения; симуляционный модуль для отработки сценариев реагирования; система ранжирования операторов по эффективности; интеграция с ГИС-системами (ArcGIS, QGIS); поддержка блокчейн-технологий для неизменяемого хранения критически важных данных.</p>
+          <p>Программа реализует концепцию цифровой платформы международного управления с опорой на научные данные (статистика, результаты исследований, открытые датасеты), ИИ-аналитику (машинное обучение, нейронные сети, естественный язык), междисциплинарный подход (сочетание юридических, экологических, технических знаний). Работает в соответствии с Регламентом ЕЦСУ (Разделы 1–7) и соответствует международным стандартам информационной безопасности (ISO 27001, GDPR).</p>
         </div>
       </div>
 
@@ -733,7 +725,7 @@ function DocFips() {
               { n: "3", doc: "Доверенность (при подаче через представителя)", check: "☐" },
               { n: "4", doc: "Договор об отчуждении прав (если применимо)", check: "☐" },
               { n: "5", doc: "Описание интерфейса и скриншоты программы", check: "☑" },
-              { n: "6", doc: "Партнёрское соглашение (Николаев В.В. + Poehali.dev)", check: "☑" },
+              { n: "6", doc: "Реферат программы (Раздел IV настоящей заявки)", check: "☑" },
             ].map(({ n, doc, check }) => (
               <div key={n} className="flex items-start gap-2">
                 <span className="text-gray-500">{n}.</span>
@@ -1205,6 +1197,225 @@ function DocPayment() {
   );
 }
 
+function DocAiHub() {
+  return (
+    <div className="doc-print text-sm">
+      <div className="text-center mb-6">
+        <div className="text-xs uppercase tracking-widest text-gray-500 mb-1">Техническое задание</div>
+        <div className="border-2 border-black inline-block px-6 py-2 mb-3">
+          <div className="font-bold text-base uppercase">ИИ‑хаб: командный центр</div>
+          <div className="text-xs">Многофункциональный ИИ‑ассистент</div>
+        </div>
+        <div className="text-xs text-gray-500">Версия 1.0 · {TODAY} · Правообладатель: Николаев В.В.</div>
+      </div>
+
+      {[
+        {
+          title: "1. Цель проекта",
+          content: "Создать многофункциональный ИИ‑ассистент с открытым исходным кодом для обработки текстовых запросов, голосовых команд, изображений и документов. Интерфейс — компактная панель справа (десктоп) или выплывающая панель (мобильная версия).",
+        },
+        {
+          title: "2. Основные функции",
+          list: [
+            "Основной чат с ИИ‑ассистентом — диалог с сохранением контекста",
+            "Голосовой ввод — преобразование речи в текст",
+            "Анализ фото — распознавание объектов и текста (OCR)",
+            "Работа с документами — анализ PDF, DOCX, TXT",
+            "Пакетная загрузка — отправка до 5 файлов одновременно",
+            "История файлов — доступ к последним 20 загрузкам",
+            "Настройки ИИ — персонализация стиля ответов и параметров",
+          ],
+        },
+      ].map(sec => (
+        <div key={sec.title} className="mb-5">
+          <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">{sec.title}</div>
+          <div className="border border-gray-400 p-3 text-xs leading-relaxed">
+            {sec.content && <p>{sec.content}</p>}
+            {sec.list && <ul className="list-disc list-inside space-y-1">{sec.list.map(l => <li key={l}>{l}</li>)}</ul>}
+          </div>
+        </div>
+      ))}
+
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">3. Используемые технологии (открытый код)</div>
+        <div className="border border-gray-400 p-3">
+          <table className="w-full border-collapse text-xs">
+            <thead>
+              <tr className="bg-gray-50">
+                <th className="border border-gray-300 px-2 py-1 text-left">Функция</th>
+                <th className="border border-gray-300 px-2 py-1 text-left">Инструмент</th>
+                <th className="border border-gray-300 px-2 py-1 text-left">Назначение</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["Генерация текста", "Qwen", "Многофункциональная модель для генерации текста, поиска, программирования, работы с изображениями"],
+                ["Генерация текста", "DeepSeek", "Генерация текстов, перевод, ответы на вопросы, работа с кодом (поддержка русского языка)"],
+                ["Анализ изображений", "OmniFusion", "Распознавание и описание изображений, визуальный диалог"],
+                ["Анализ изображений", "MiVOLO", "Определение пола и возраста по фото (даже при частичном отсутствии лица)"],
+                ["Работа с документами", "Khoj", "Поиск информации в файлах (PDF, Word, Markdown и др.)"],
+                ["Работа с документами", "Chat2DB", "Конвертация естественного языка в SQL, генерация отчётов"],
+                ["Голосовые технологии", "Vikhr Salt", "Преобразование речи в текст и текста в аудио"],
+                ["Фреймворки", "LangChain", "Построение пользовательских потоков управления ИИ‑агентами"],
+                ["Фреймворки", "Ollama", "Локальный запуск больших языковых моделей (LLM)"],
+                ["Фреймворки", "n8n", "Визуальный конструктор рабочих процессов с ИИ"],
+              ].map(([f, t, d]) => (
+                <tr key={t}>
+                  <td className="border border-gray-300 px-2 py-1">{f}</td>
+                  <td className="border border-gray-300 px-2 py-1 font-semibold">{t}</td>
+                  <td className="border border-gray-300 px-2 py-1 text-gray-600">{d}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">4. Технические требования</div>
+        <div className="border border-gray-400 p-3 text-xs leading-relaxed space-y-1">
+          <p>• Язык программирования: Python 3.10+</p>
+          <p>• Фреймворк: FastAPI (бэкенд), React (фронтенд)</p>
+          <p>• База данных: SQLite (история чатов и файлов)</p>
+          <p>• Хранение файлов: локальное хранилище (до 1 ГБ) с возможностью масштабирования</p>
+          <p>• Изображения: JPG, PNG (до 20 МБ) · Документы: PDF, DOC, DOCX, TXT (до 100 МБ) · Аудио: WAV, MP3 (до 50 МБ)</p>
+          <p>• Языки интерфейса: русский, английский</p>
+          <p>• Совместимость: Chrome, Firefox, Safari; iOS, Android</p>
+        </div>
+      </div>
+
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">5. Структура меню (UI)</div>
+        <div className="border border-gray-400 p-3 text-xs font-mono leading-relaxed">
+          <p>ИИ‑ХАБ: КОМАНДНЫЙ ЦЕНТР</p>
+          <p>├── 🤖 ИИ‑ассистент (основной чат)</p>
+          <p>├── 🎤 Голосовой ввод</p>
+          <p>├── 📸 Анализ фото</p>
+          <p>├── 📄 Работа с документами</p>
+          <p>├── 💼 Пакетная загрузка</p>
+          <p>├── 🗂️ История файлов</p>
+          <p>└── ⚙️ Настройки ИИ</p>
+        </div>
+      </div>
+
+      <div className="border border-gray-300 p-4 text-xs mt-6">
+        <div className="grid grid-cols-3 gap-6">
+          <div className="text-center"><div className="border-t border-black pt-1">Дата</div><div className="text-gray-400 mt-1">___ . ___ . 2026</div></div>
+          <div className="text-center"><div className="border-t border-black pt-1">Подпись</div><div className="text-gray-300 mt-4 text-lg">_______________</div></div>
+          <div className="text-center"><div className="border-t border-black pt-1">Правообладатель</div><div className="text-gray-600 mt-1 font-semibold text-[10px]">Николаев В.В.</div></div>
+        </div>
+      </div>
+      <div className="mt-4 text-center text-[10px] text-gray-400">{APP} · {REG_NUM} · {TODAY}</div>
+    </div>
+  );
+}
+
+function DocGrafium() {
+  return (
+    <div className="doc-print text-sm">
+      <div className="text-center mb-6">
+        <div className="text-xs uppercase tracking-widest text-gray-500 mb-1">Техническое задание</div>
+        <div className="border-2 border-black inline-block px-6 py-2 mb-3">
+          <div className="font-bold text-base uppercase">Ежедневник «Графиум»</div>
+          <div className="text-xs">Система ежедневных задач · надёжный инструмент продуктивности</div>
+        </div>
+        <div className="text-xs text-gray-500">Версия 1.0 · {TODAY} · Правообладатель: Николаев В.В.</div>
+      </div>
+
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">1. Общие требования</div>
+        <div className="border border-gray-400 p-3 text-xs leading-relaxed space-y-1">
+          <p>• Формат: А5 (148×210 мм), альбомная ориентация разворотов</p>
+          <p>• Обложка: твёрдая, матовая ламинация, тиснение названия</p>
+          <p>• Бумага: офсет 80 г/м², слегка тонированная (кремовый оттенок), без бликов</p>
+          <p>• Переплёт: пружинный или скрепление на кольцах (для возможности замены блоков)</p>
+          <p>• Комплектация: набор маркеров‑текстовыделителей (8 цветов), цветные стикеры, закладки‑ленты (8 шт.), прозрачный карман</p>
+        </div>
+      </div>
+
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">2. Структура ежедневника</div>
+        <div className="border border-gray-400 p-3 text-xs leading-relaxed">
+          <ul className="list-disc list-inside space-y-1">
+            {[
+              "Титульный лист — место для имени, года, контактов",
+              "Цели на год — 2 страницы: таблица по сферам + шкала прогресса",
+              "Обзор года — календарная сетка на разворот (12 месяцев)",
+              "Месячный планинг — разворот на месяц: сетка + цели, бюджет, привычки",
+              "Ежедневные развороты — дата, главная цель, список дел, временная шкала (7:00–23:00), заметки, итоги",
+              "Еженедельный обзор — анализ, перенос задач, рефлексия",
+              "Контакты (10 стр.), список книг/фильмов (4 стр.), финансы (6 стр.), трекер привычек",
+              "Прозрачный карман для мелочей, линейка‑шаблон",
+            ].map(l => <li key={l}>{l}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">3. Функционал «Редактора подсветки» — цветовая схема</div>
+        <div className="border border-gray-400 p-3">
+          <table className="w-full border-collapse text-xs">
+            <thead>
+              <tr className="bg-gray-50">
+                <th className="border border-gray-300 px-2 py-1 text-left">Цвет</th>
+                <th className="border border-gray-300 px-2 py-1 text-left">Назначение</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["Красный", "Срочные и важные задачи"],
+                ["Синий", "Рабочие задачи и проекты"],
+                ["Зелёный", "Здоровье, спорт, питание"],
+                ["Жёлтый", "Обучение, саморазвитие"],
+                ["Фиолетовый", "Личные дела и семья"],
+                ["Оранжевый", "Творчество, хобби, отдых"],
+                ["Розовый", "Социальные события, встречи"],
+                ["Серый", "Рутинные дела, напоминания"],
+              ].map(([c, d]) => (
+                <tr key={c}>
+                  <td className="border border-gray-300 px-2 py-1 font-semibold">{c}</td>
+                  <td className="border border-gray-300 px-2 py-1 text-gray-600">{d}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">4. Визуальные маркеры и элементы разметки</div>
+        <div className="border border-gray-400 p-3 text-xs leading-relaxed">
+          <p className="mb-2"><strong>Значки задач:</strong> ! (срочно) · ⭐ (приоритет) · 🔄 (повторяющаяся) · 💡 (идея) · ✅ (выполнено) · ⏳ (отложено) · ❓ (требует уточнения)</p>
+          <p className="mb-2"><strong>Элементы разметки:</strong> вертикальная полоса слева — для цветового приоритета; кружки рядом с пунктами — для маркировки сферы жизни; цветные зоны в «Итогах дня»: зелёное поле (успехи), жёлтое поле (зоны роста); прозрачные вкладки‑разделители между месяцами.</p>
+          <p><strong>Интерактивные элементы:</strong> стикеры‑индикаторы (прозрачные, цветные, разной формы); закладки‑ленты с нумерацией; линейка‑шаблон для быстрого создания таблиц.</p>
+        </div>
+      </div>
+
+      <div className="mb-5">
+        <div className="bg-gray-100 border border-gray-400 px-3 py-1 font-bold text-xs uppercase mb-3">5. Требования к дизайну</div>
+        <div className="border border-gray-400 p-3 text-xs leading-relaxed space-y-1">
+          <p>• Шрифт: чёткий, без засечек (Open Sans, Roboto)</p>
+          <p>• Поля: широкие (20 мм) для заметок и подсветки</p>
+          <p>• Сетка: лёгкая разметка, не мешает подсветке маркерами</p>
+          <p>• Иконки: минималистичные, чёрно‑белые</p>
+          <p>• Цветовые зоны: мягкие пастельные оттенки, не конфликтуют с маркерами</p>
+          <p>• Инструкция: краткая памятка в начале (как использовать подсветку, советы для дальтоников)</p>
+          <p>• Мотивационные цитаты в начале месяцев, мини‑задания на развитие привычек</p>
+        </div>
+      </div>
+
+      <div className="border border-gray-300 p-4 text-xs mt-6">
+        <div className="grid grid-cols-3 gap-6">
+          <div className="text-center"><div className="border-t border-black pt-1">Дата</div><div className="text-gray-400 mt-1">___ . ___ . 2026</div></div>
+          <div className="text-center"><div className="border-t border-black pt-1">Подпись</div><div className="text-gray-300 mt-4 text-lg">_______________</div></div>
+          <div className="text-center"><div className="border-t border-black pt-1">Правообладатель</div><div className="text-gray-600 mt-1 font-semibold text-[10px]">Николаев В.В.</div></div>
+        </div>
+      </div>
+      <div className="mt-4 text-center text-[10px] text-gray-400">{APP} · {REG_NUM} · {TODAY}</div>
+    </div>
+  );
+}
+
 const DOC_COMPONENTS: Record<string, () => JSX.Element> = {
   copyright: DocCopyright,
   modification: DocModification,
@@ -1215,6 +1426,8 @@ const DOC_COMPONENTS: Record<string, () => JSX.Element> = {
   privacy: DocPrivacy,
   terms: DocTerms,
   legalization: DocLegalization,
+  aihub: DocAiHub,
+  grafium: DocGrafium,
 };
 
 export default function EgsuDocs() {
