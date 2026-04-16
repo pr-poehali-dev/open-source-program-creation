@@ -32,7 +32,7 @@ export default function DashboardLayout({ activeTab, setActiveTab, chatOpen, set
           </div>
           <div>
             <div className="font-display text-base font-bold text-white tracking-wide leading-none">ДАШБОРД КООРДИНАТОРА</div>
-            <div className="text-white/30 text-[10px]">ЕЦСУ 2.0 · Аналитика</div>
+            <div className="text-white/30 text-[10px]">ECSU 2.0 · Аналитика</div>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -136,7 +136,7 @@ export default function DashboardLayout({ activeTab, setActiveTab, chatOpen, set
             { key: "incidents", icon: "AlertTriangle", label: "Инциденты" },
             { key: "predicted", icon: "BrainCircuit", label: "Прогнозы" },
             { key: "ai", icon: "Cpu", label: "ИИ-аналитика" },
-            { key: "organs", icon: "Network", label: "Органы ЕЦСУ" },
+            { key: "organs", icon: "Network", label: "Органы ECSU" },
             { key: "security", icon: "ShieldCheck", label: "Безопасность", color: "#f43f5e" },
             { key: "license", icon: "BadgeCheck", label: "Лицензия", color: "#f59e0b" },
             { key: "loader", icon: "Terminal", label: "Загрузчик", color: "#00ff87" },
@@ -160,9 +160,9 @@ export default function DashboardLayout({ activeTab, setActiveTab, chatOpen, set
           {children}
 
           <div className="mt-8 text-center space-y-1">
-            <p className="text-white/15 text-[10px]">© 13 апреля 2026 · ЕЦСУ 2.0 · Все права защищены</p>
+            <p className="text-white/15 text-[10px]">© 13 апреля 2026 · ECSU 2.0 · Все права защищены</p>
             <p className="text-white/10 text-[10px]">Правообладатель и контрольный пакет акций: Николаев Владимир Владимирович</p>
-            <p className="text-white/10 text-[10px]">Разработка: Poehali.dev · Партнёрская программа ЕЦСУ</p>
+            <p className="text-white/10 text-[10px]">Разработка: Poehali.dev · Партнёрская программа ECSU</p>
           </div>
         </main>
       </div>

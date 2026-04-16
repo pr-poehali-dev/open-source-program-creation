@@ -120,7 +120,7 @@ export default function EgsuAnalytics() {
           </div>
           <div>
             <div className="font-display text-base font-bold text-white tracking-wide leading-none">АНАЛИТИКА И ОТЧЁТЫ</div>
-            <div className="text-white/30 text-[10px]">ЕЦСУ 2.0 · Business Intelligence</div>
+            <div className="text-white/30 text-[10px]">ECSU 2.0 · Business Intelligence</div>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -171,7 +171,7 @@ export default function EgsuAnalytics() {
             <div className="space-y-6">
               <div>
                 <h1 className="font-display text-2xl font-bold text-white uppercase">Сводка аналитики</h1>
-                <p className="text-white/30 text-sm mt-1">Актуальные показатели ЕЦСУ 2.0</p>
+                <p className="text-white/30 text-sm mt-1">Актуальные показатели ECSU 2.0</p>
               </div>
 
               {/* Финансовые KPI */}

@@ -1,5 +1,5 @@
 """
-Модуль безопасности ЕЦСУ 2.0 — Режим Поглощения v2.
+Модуль безопасности ECSU 2.0 — Режим Поглощения v2.
 Фиксирует несанкционированные вторжения, блокировки системы, кибератаки.
 Определяет источник угрозы через эфир/спектр анализ.
 Накладывает штраф на владельца канала/IP.
@@ -234,7 +234,7 @@ def record_event_and_charge(cur, event_type: str, ip: str, description: str,
 
 
 def handler(event: dict, context) -> dict:
-    """Модуль безопасности ЕЦСУ — Режим Поглощения v2."""
+    """Модуль безопасности ECSU — Режим Поглощения v2."""
     if event.get("httpMethod") == "OPTIONS":
         return {"statusCode": 200, "headers": CORS, "body": ""}
 
@@ -443,11 +443,11 @@ def handler(event: dict, context) -> dict:
 
     # ── POST /block-response — реагирование на блокировку системы ────────────
     if method == "POST" and "/block-response" in path:
-        """Ответ на несанкционированную блокировку ЕЦСУ."""
+        """Ответ на несанкционированную блокировку ECSU."""
         blocker_ip = body.get("ip_address", client_ip)
         blocker_channel = body.get("channel", "unknown")
         block_type = body.get("block_type", "system_block")  # system_block, ddos, channel_hijack
-        description = body.get("description", "Несанкционированная блокировка системы ЕЦСУ")
+        description = body.get("description", "Несанкционированная блокировка системы ECSU")
 
         geo = geo_lookup(blocker_ip) if blocker_ip and blocker_ip != "unknown" else {}
 

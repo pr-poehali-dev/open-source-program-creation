@@ -8,7 +8,7 @@ const AI_API = "https://functions.poehali.dev/daefa87e-0693-4de5-9191-bbc918e1d2
 const OWNER = {
   name: "Николаев Владимир Владимирович",
   email: "nikolaevvladimir77@yandex.ru",
-  system: "ЕЦСУ 2.0",
+  system: "ECSU 2.0",
   status: "Гражданин РФ, автор системы (в стадии разработки)",
 };
 
@@ -36,7 +36,7 @@ const LEGAL_FUNCTIONS = [
     title: "Подача инцидентов",
     desc: "Фиксация экологических, кибер-, гуманитарных нарушений с доказательной базой в международной системе мониторинга",
     legal: "ФЗ №7 «Об охране окружающей среды»; Орхусская конвенция; Будапештская конвенция",
-    how: "Меню → Новый инцидент → заполните форму → система проверит и направит в ЕЦСУ",
+    how: "Меню → Новый инцидент → заполните форму → система проверит и направит в ECSU",
   },
   {
     id: "reward", icon: "Coins", color: "#00ff87",
@@ -62,7 +62,7 @@ const LEGAL_FUNCTIONS = [
   {
     id: "ai_consult", icon: "Bot", color: "#3b82f6",
     title: "ИИ-консультации",
-    desc: "Юридические консультации от ИИ-администратора ЕЦСУ 2.0 по вопросам права РФ и международного законодательства",
+    desc: "Юридические консультации от ИИ-администратора ECSU 2.0 по вопросам права РФ и международного законодательства",
     legal: "Носит консультационный характер. Не заменяет адвоката.",
     how: "Кнопка ИИ-чата в любом разделе → задайте вопрос → получите ответ со ссылками на законы",
   },
@@ -144,7 +144,7 @@ export default function EgsuForUsers() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: `Правовая консультация для пользователя ЕЦСУ 2.0.\nВопрос: ${legalForm.question}\nТип: ${legalForm.type}\n\nДай развёрнутый ответ с конкретными ссылками на статьи законов РФ. Если применимо — международное право. В конце укажи в какие органы можно обратиться.`,
+          message: `Правовая консультация для пользователя ECSU 2.0.\nВопрос: ${legalForm.question}\nТип: ${legalForm.type}\n\nДай развёрнутый ответ с конкретными ссылками на статьи законов РФ. Если применимо — международное право. В конце укажи в какие органы можно обратиться.`,
           session_id: `user_legal_${Date.now()}`,
           history: [],
           provider: "auto",
@@ -196,7 +196,7 @@ export default function EgsuForUsers() {
           <Icon name="Users" size={16} style={{ color: "#000" }} />
         </div>
         <div>
-          <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: 2, color: "#fff" }}>ЕЦСУ 2.0 ДЛЯ ПОЛЬЗОВАТЕЛЕЙ</div>
+          <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: 2, color: "#fff" }}>ECSU 2.0 ДЛЯ ПОЛЬЗОВАТЕЛЕЙ</div>
           <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)" }}>Правовые функции · Тарифы · Конфиденциальность</div>
         </div>
         <div style={{ marginLeft: "auto", fontSize: 12 }}>
@@ -210,7 +210,7 @@ export default function EgsuForUsers() {
 
         {/* Заголовок */}
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <div style={{ fontSize: 28, fontWeight: 900, color: "#fff", marginBottom: 8 }}>ЕЦСУ 2.0</div>
+          <div style={{ fontSize: 28, fontWeight: 900, color: "#fff", marginBottom: 8 }}>ECSU 2.0</div>
           <div style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", marginBottom: 4 }}>Единая Центральная Система Управления</div>
           <div style={{ fontSize: 12, color: "rgba(255,255,255,0.3)" }}>Автор: {OWNER.name} · Гражданская инициатива · В стадии разработки</div>
         </div>
@@ -229,7 +229,7 @@ export default function EgsuForUsers() {
         {tab === "functions" && (
           <div>
             <div style={{ background: "rgba(0,255,135,0.06)", border: "1px solid rgba(0,255,135,0.2)", borderRadius: 12, padding: 16, marginBottom: 24, fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.7 }}>
-              <div style={{ fontWeight: 700, color: "#00ff87", marginBottom: 6 }}>Что вы можете делать в системе ЕЦСУ 2.0</div>
+              <div style={{ fontWeight: 700, color: "#00ff87", marginBottom: 6 }}>Что вы можете делать в системе ECSU 2.0</div>
               Система предоставляет гражданам инструменты для реализации конституционных прав в соответствии с законодательством РФ и международным правом. Всё взаимодействие происходит от имени автора системы — <strong style={{ color: "#e0e8ff" }}>{OWNER.name}</strong>, на гражданском уровне.
             </div>
 
@@ -253,7 +253,7 @@ export default function EgsuForUsers() {
 
             <div style={{ marginTop: 24, padding: 16, background: "rgba(59,130,246,0.06)", border: "1px solid rgba(59,130,246,0.2)", borderRadius: 12, fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>
               <div style={{ fontWeight: 700, color: "#60a5fa", marginBottom: 6 }}>Важно: система в стадии разработки</div>
-              ЕЦСУ 2.0 является гражданской инициативой. Все обращения, инциденты и заявки на вознаграждение направляются от имени автора системы — {OWNER.name} — на правах гражданина РФ. ИИ-консультации носят информационный характер и не заменяют юридическую помощь лицензированного адвоката. Контакт: {OWNER.email}
+              ECSU 2.0 является гражданской инициативой. Все обращения, инциденты и заявки на вознаграждение направляются от имени автора системы — {OWNER.name} — на правах гражданина РФ. ИИ-консультации носят информационный характер и не заменяют юридическую помощь лицензированного адвоката. Контакт: {OWNER.email}
             </div>
           </div>
         )}
@@ -266,7 +266,7 @@ export default function EgsuForUsers() {
             ) : (
               <>
                 <div style={{ textAlign: "center", marginBottom: 24 }}>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 6 }}>Тарифные планы ЕЦСУ 2.0</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: "#fff", marginBottom: 6 }}>Тарифные планы ECSU 2.0</div>
                   <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>Базовый тариф — всегда бесплатно. Дополнительные возможности — от 199 ₽/мес</div>
                 </div>
 
@@ -306,7 +306,7 @@ export default function EgsuForUsers() {
                             Доступно прямо сейчас
                           </div>
                         ) : (
-                          <a href={`mailto:${OWNER.email}?subject=Подписка ЕЦСУ 2.0 — ${t.name_ru}&body=Прошу подключить тариф «${t.name_ru}» для системы ЕЦСУ 2.0.%0A%0AМоё имя:%0AEmail:%0AТелефон:`}
+                          <a href={`mailto:${OWNER.email}?subject=Подписка ECSU 2.0 — ${t.name_ru}&body=Прошу подключить тариф «${t.name_ru}» для системы ECSU 2.0.%0A%0AМоё имя:%0AEmail:%0AТелефон:`}
                             style={{ display: "block", padding: "10px 16px", background: `${c}20`, border: `1px solid ${c}40`, borderRadius: 8, textAlign: "center", fontSize: 13, fontWeight: 700, color: c, textDecoration: "none" }}>
                             Запросить подключение →
                           </a>
@@ -328,9 +328,9 @@ export default function EgsuForUsers() {
         {tab === "privacy" && (
           <div>
             <div style={{ background: "rgba(34,197,94,0.06)", border: "1px solid rgba(34,197,94,0.2)", borderRadius: 12, padding: 20, marginBottom: 24 }}>
-              <div style={{ fontWeight: 800, fontSize: 16, color: "#22c55e", marginBottom: 8 }}>Политика конфиденциальности ЕЦСУ 2.0</div>
+              <div style={{ fontWeight: 800, fontSize: 16, color: "#22c55e", marginBottom: 8 }}>Политика конфиденциальности ECSU 2.0</div>
               <div style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", lineHeight: 1.8 }}>
-                Система ЕЦСУ 2.0 является гражданской инициативой в стадии разработки. Автор и администратор системы — <strong style={{ color: "#e0e8ff" }}>{OWNER.name}</strong>. Контакт: <a href="mailto:nikolaevvladimir77@yandex.ru" style={{ color: "#00ff87" }}>nikolaevvladimir77@yandex.ru</a>
+                Система ECSU 2.0 является гражданской инициативой в стадии разработки. Автор и администратор системы — <strong style={{ color: "#e0e8ff" }}>{OWNER.name}</strong>. Контакт: <a href="mailto:nikolaevvladimir77@yandex.ru" style={{ color: "#00ff87" }}>nikolaevvladimir77@yandex.ru</a>
                 <br /><br />
                 Используя систему, вы соглашаетесь с данной политикой. Система соответствует ФЗ №152 «О персональных данных» РФ.
               </div>
@@ -358,7 +358,7 @@ export default function EgsuForUsers() {
               • Не отслеживает геолокацию без разрешения<br />
               • Не использует данные для профилирования<br /><br />
               <div style={{ fontWeight: 700, color: "#a855f7", marginBottom: 8 }}>Как удалить свои данные:</div>
-              Напишите на {OWNER.email} с темой «Удаление данных ЕЦСУ». Все данные удаляются в течение 72 часов.
+              Напишите на {OWNER.email} с темой «Удаление данных ECSU». Все данные удаляются в течение 72 часов.
             </div>
           </div>
         )}
@@ -368,7 +368,7 @@ export default function EgsuForUsers() {
           <div>
             <div style={{ marginBottom: 24 }}>
               <div style={{ fontWeight: 700, fontSize: 16, color: "#fff", marginBottom: 6 }}>Правовой портал пользователя</div>
-              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>Задайте юридический вопрос — ИИ-администратор ЕЦСУ даст ответ со ссылками на законы</div>
+              <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>Задайте юридический вопрос — ИИ-администратор ECSU даст ответ со ссылками на законы</div>
             </div>
 
             <div style={{ display: "grid", gap: 12, marginBottom: 20 }}>
@@ -409,7 +409,7 @@ export default function EgsuForUsers() {
 
             {legalResult && (
               <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(168,85,247,0.2)", borderRadius: 12, padding: 20 }}>
-                <div style={{ fontSize: 11, color: "#a855f7", fontWeight: 700, marginBottom: 12, textTransform: "uppercase", letterSpacing: 1 }}>Консультация ИИ-администратора ЕЦСУ 2.0</div>
+                <div style={{ fontSize: 11, color: "#a855f7", fontWeight: 700, marginBottom: 12, textTransform: "uppercase", letterSpacing: 1 }}>Консультация ИИ-администратора ECSU 2.0</div>
                 <div style={{ fontSize: 13, color: "rgba(255,255,255,0.75)", lineHeight: 1.8, whiteSpace: "pre-wrap" }}
                   dangerouslySetInnerHTML={{ __html: legalResult.replace(/\*\*(.+?)\*\*/g, '<strong style="color:#fff">$1</strong>').replace(/\n/g, '<br/>') }} />
                 <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: 11, color: "rgba(255,255,255,0.3)" }}>
@@ -443,7 +443,7 @@ export default function EgsuForUsers() {
         )}
 
         <div style={{ marginTop: 32, textAlign: "center", fontSize: 11, color: "rgba(255,255,255,0.2)", lineHeight: 1.7 }}>
-          ЕЦСУ 2.0 · Автор: {OWNER.name} · {OWNER.email}<br />
+          ECSU 2.0 · Автор: {OWNER.name} · {OWNER.email}<br />
           Гражданская инициатива в стадии разработки · © 2024 · Все права защищены
         </div>
       </div>

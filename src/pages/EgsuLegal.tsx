@@ -107,7 +107,7 @@ export default function EgsuLegal() {
             <Icon name="Scale" size={14} className="text-white" />
           </div>
           <div>
-            <div className="font-display text-base font-bold text-white tracking-wide leading-none">ПРАВОВАЯ БАЗА ЕЦСУ</div>
+            <div className="font-display text-base font-bold text-white tracking-wide leading-none">ПРАВОВАЯ БАЗА ECSU</div>
             <div className="text-white/30 text-[10px]">Юрисдикции · Кодексы · Статьи</div>
           </div>
         </div>

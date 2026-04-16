@@ -112,7 +112,7 @@ const genSession = () => `session_${Date.now()}_${Math.random().toString(36).sli
 
 const TOPIC_GROUPS = [
   { label: "⚖️ Право", color: "#3b82f6", items: ["Права обвиняемого", "Как подать иск?", "Что такое УПК?"] },
-  { label: "🌐 ЕЗСУ", color: "#a855f7", items: ["Критические инциденты", "Что умеет ЕЗСУ?", "Статистика системы"] },
+  { label: "🌐 ECSU", color: "#a855f7", items: ["Критические инциденты", "Что умеет ECSU?", "Статистика системы"] },
   { label: "📡 ЦПВОА", color: "#4CAF50", items: ["Что такое ЦПВОА?", "Как анализировать аномалии?", "Режимы мониторинга"] },
   { label: "🔍 Анализ", color: "#f59e0b", items: ["Объясни МГП", "Международное право", "Нефтяной разлив Нигерия"] },
 ];
@@ -187,7 +187,7 @@ export default function AiChat({ onClose, initialCpvoaContext, initialMessage }:
       role: "assistant",
       text: initialCpvoaContext
         ? `**Синхронизация с ЦПВОА выполнена** ✅\n\nПолучено **${initialCpvoaContext.incidents.length}** инцидентов. Режим: *${initialCpvoaContext.mode}* · Связь: *${initialCpvoaContext.connection}*.\n\nМогу проанализировать данные, дать рекомендации или ответить на вопросы по обнаруженным аномалиям.`
-        : "Привет! Я ИИ-ассистент **ЕЗСУ 2.0**, интегрированный с модулем **ЦПВОА**.\n\nМогу помочь с правовыми вопросами, анализом инцидентов и мониторингом аномалий.\n\nВыбери тему или напиши сам:",
+        : "Привет! Я ИИ-ассистент **ECSU 2.0**, интегрированный с модулем **ЦПВОА**.\n\nМогу помочь с правовыми вопросами, анализом инцидентов и мониторингом аномалий.\n\nВыбери тему или напиши сам:",
       time: getTime(),
       suggestions: initialCpvoaContext
         ? ["Проанализируй инциденты", "Дай рекомендации", "Критические угрозы"]
@@ -387,7 +387,7 @@ export default function AiChat({ onClose, initialCpvoaContext, initialMessage }:
             />
           </div>
           <div>
-            <div className="text-white font-bold text-sm leading-none">ИИ-Ассистент ЕЗСУ</div>
+            <div className="text-white font-bold text-sm leading-none">ИИ-Ассистент ECSU</div>
             <div className="text-[10px]" style={{ color: cpvoaSynced ? "#4CAF50" : currentProvider.color }}>
               {cpvoaSynced ? "📡 ЦПВОА синхронизирован" : `${currentProvider.label} · ${selectedProvider === "auto" ? "авто" : "активен"}`}
             </div>
@@ -479,13 +479,13 @@ export default function AiChat({ onClose, initialCpvoaContext, initialMessage }:
       {/* ── TAB: АДМИНИСТРАТОР ── */}
       {tab === "admin" && (
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3" style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(168,85,247,0.3) transparent" }}>
-          <div className="text-[10px] uppercase tracking-widest text-white/30 mb-2">ИИ-Администратор ЕЦСУ · Заместитель владельца</div>
+          <div className="text-[10px] uppercase tracking-widest text-white/30 mb-2">ИИ-Администратор ECSU · Заместитель владельца</div>
 
           {[
             { cmd: "ai_sync", label: "Синхронизация системы", icon: "RefreshCw", color: "#a855f7", desc: "ИИ получает текущие данные всей системы и анализирует" },
             { cmd: "scan_incidents", label: "Сканировать источники", icon: "Radar", color: "#22c55e", desc: "GDACS, USGS, OpenAQ, CVE, ReliefWeb, EMSC → БД" },
             { cmd: "get_stats", label: "Статистика системы", icon: "BarChart3", color: "#3b82f6", desc: "Инциденты, события безопасности, транзакции за 24ч" },
-            { cmd: "list_incidents", label: "Активные инциденты", icon: "AlertTriangle", color: "#f59e0b", desc: "Список всех активных инцидентов из БД ЕЦСУ" },
+            { cmd: "list_incidents", label: "Активные инциденты", icon: "AlertTriangle", color: "#f59e0b", desc: "Список всех активных инцидентов из БД ECSU" },
             { cmd: "get_log", label: "Системный журнал", icon: "FileText", color: "#64748b", desc: "Последние события и действия в системе" },
           ].map(({ cmd, label, icon, color, desc }) => (
             <button
@@ -507,7 +507,7 @@ export default function AiChat({ onClose, initialCpvoaContext, initialMessage }:
           ))}
 
           <div className="mt-4 p-3 rounded-xl text-[11px] text-white/30" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)" }}>
-            Все действия выполняются от имени ИИ-администратора и записываются в системный журнал ЕЦСУ.
+            Все действия выполняются от имени ИИ-администратора и записываются в системный журнал ECSU.
           </div>
         </div>
       )}
@@ -868,7 +868,7 @@ export default function AiChat({ onClose, initialCpvoaContext, initialMessage }:
               <button onClick={() => setTab("settings")}
                 className="text-[10px] transition-colors hover:opacity-80"
                 style={{ color: currentProvider.color + "80" }}>
-                {cpvoaSynced ? `📡 ${currentProvider.label} + ЦПВОА` : `${currentProvider.label} · ЕЗСУ 2.0`}
+                {cpvoaSynced ? `📡 ${currentProvider.label} + ЦПВОА` : `${currentProvider.label} · ECSU 2.0`}
               </button>
             </div>
           </div>

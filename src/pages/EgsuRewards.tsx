@@ -6,7 +6,7 @@ const GATEWAY = "https://functions.poehali.dev/417cb87f-8717-4563-a698-6e3f5bb17
 const SMS_API = "https://functions.poehali.dev/65523c0c-db23-4d8b-9c7e-6bae200b3318";
 const FINANCE_API = "https://functions.poehali.dev/e610af8a-f8c5-4c04-8d9b-092391fb0c70";
 
-const OWNER = { name: "Николаев Владимир Владимирович", system: "ЕЦСУ 2.0" };
+const OWNER = { name: "Николаев Владимир Владимирович", system: "ECSU 2.0" };
 
 type RewardType = {
   id: number; code: string; name_ru: string; description: string;
@@ -148,7 +148,7 @@ export default function EgsuRewards() {
         </div>
         <div>
           <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: 2, color: "#fff" }}>ВОЗНАГРАЖДЕНИЯ И МОНИТОРИНГ</div>
-          <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)" }}>ЕЦСУ 2.0 · Содействие · Законодательная база РФ</div>
+          <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)" }}>ECSU 2.0 · Содействие · Законодательная база РФ</div>
         </div>
       </nav>
 
@@ -178,7 +178,7 @@ export default function EgsuRewards() {
               <div style={{ fontWeight: 700, color: "#00ff87", marginBottom: 8 }}>Правовая основа получения вознаграждений</div>
               Согласно законодательству РФ, граждане имеют право на вознаграждение за содействие в выявлении коррупции, экологических нарушений, киберугроз.
               Выплаты производятся соответствующими государственными органами после подтверждения фактов.
-              Заявки подаются через ЕЦСУ 2.0 от имени <strong style={{ color: "#e0e8ff" }}>{OWNER.name}</strong>.
+              Заявки подаются через ECSU 2.0 от имени <strong style={{ color: "#e0e8ff" }}>{OWNER.name}</strong>.
             </div>
             <div style={{ display: "grid", gap: 16 }}>
               {rewards.map(r => (
@@ -287,7 +287,7 @@ export default function EgsuRewards() {
         {!loading && tab === "countries" && (
           <div>
             <div style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 20 }}>
-              Обращения от ЕЦСУ 2.0 могут быть направлены в ведомства следующих стран и международных организаций:
+              Обращения от ECSU 2.0 могут быть направлены в ведомства следующих стран и международных организаций:
             </div>
             <div style={{ display: "grid", gap: 12 }}>
               {countries.map(c => (
@@ -299,7 +299,7 @@ export default function EgsuRewards() {
                   <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginBottom: 6 }}>Орган: {c.contact_ministry}</div>
                   <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                     {c.contact_email && (
-                      <a href={`mailto:${c.contact_email}?subject=Обращение ЕЦСУ 2.0&body=От: Николаев В.В., ЕЦСУ 2.0%0A%0A`}
+                      <a href={`mailto:${c.contact_email}?subject=Обращение ECSU 2.0&body=От: Николаев В.В., ECSU 2.0%0A%0A`}
                         style={{ fontSize: 12, color: "#60a5fa", textDecoration: "none", background: "rgba(59,130,246,0.1)", border: "1px solid rgba(59,130,246,0.2)", borderRadius: 6, padding: "4px 10px" }}>
                         ✉ {c.contact_email}
                       </a>

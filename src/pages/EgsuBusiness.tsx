@@ -49,7 +49,7 @@ export default function EgsuBusiness() {
           </div>
           <div>
             <div className="font-display text-base font-bold text-white tracking-wide leading-none">БИЗНЕС-МОДЕЛЬ</div>
-            <div className="text-white/30 text-[10px]">ЕЦСУ 2.0 · Стратегия и финансы</div>
+            <div className="text-white/30 text-[10px]">ECSU 2.0 · Стратегия и финансы</div>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -92,7 +92,7 @@ export default function EgsuBusiness() {
               </div>
               <div>
                 <h1 className="text-white font-bold text-xl leading-none">{activeSection.label}</h1>
-                <div className="text-white/30 text-xs mt-0.5">ЕЦСУ 2.0 · Бизнес-модель</div>
+                <div className="text-white/30 text-xs mt-0.5">ECSU 2.0 · Бизнес-модель</div>
               </div>
             </div>
             <ActiveComponent />

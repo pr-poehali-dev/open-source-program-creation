@@ -1,6 +1,7 @@
 /**
  * ============================================================
- *  ЯДРО СИСТЕМЫ ЕЦСУ 2.0 — АВТОРСКОЕ СВИДЕТЕЛЬСТВО
+ *  ЯДРО СИСТЕМЫ ECSU 2.0 — АВТОРСКОЕ СВИДЕТЕЛЬСТВО
+ *  ECSU = Единая Центральная Система Управления
  * ============================================================
  *
  *  Автор:       Николаев Владимир Владимирович
@@ -30,35 +31,33 @@ export const CORE_AUTHOR = {
 } as const;
 
 export const CORE_META = {
-  appName: "ЕЦСУ 2.0",
+  appName: "ECSU 2.0",
+  appNameRu: "ЕЦСУ 2.0",
   fullName: "Единая Центральная Система Управления",
+  fullNameEn: "Unified Central Management System",
   description: "Система мониторинга, правового анализа и управления инцидентами",
   author: CORE_AUTHOR.fullName,
+  email: "nikolaevvladimir77@yandex.ru",
   rights: "Все права принадлежат автору. Несанкционированное использование запрещено.",
 } as const;
 
 /** Версия архитектуры ядра — не изменяется без ведома владельца */
 export const CORE_ARCH = {
-  kernel: "ЕЦСУ-CORE-2",
-  aiAdmin: "egsu-ai",
+  kernel: "ECSU-CORE-2",
+  aiAdmin: "ecsu-ai",
   scanner: "incident-scanner",
-  modules: ["egsu-incidents", "security", "finance", "egsu-voice", "legal-base"],
+  modules: ["ecsu-incidents", "security", "finance", "ecsu-voice", "legal-base"],
   dataProtection: "AES-256 + HTTPS",
   selfPreservation: true,
 } as const;
 
 /**
  * Самосохранение ядра — проверяет целостность ключевых параметров.
- * Вызывать при старте приложения.
  */
 export function verifyCoreIntegrity(): { ok: boolean; version: string; author: string } {
   const required = [CORE_AUTHOR.fullName, CORE_META.appName, CORE_ARCH.kernel];
   const ok = required.every(Boolean);
-  return {
-    ok,
-    version: CORE_AUTHOR.version,
-    author: CORE_AUTHOR.fullName,
-  };
+  return { ok, version: CORE_AUTHOR.version, author: CORE_AUTHOR.fullName };
 }
 
 /**

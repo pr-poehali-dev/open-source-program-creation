@@ -56,7 +56,7 @@ export default function DocsLayout({ activeDoc, setActiveDoc, children }: Props)
             <Icon name="FileText" size={14} className="text-white" />
           </div>
           <div>
-            <div className="font-display text-base font-bold text-white tracking-wide leading-none">ДОКУМЕНТЫ ЕЦСУ</div>
+            <div className="font-display text-base font-bold text-white tracking-wide leading-none">ДОКУМЕНТЫ ECSU</div>
             <div className="text-white/30 text-[10px]">Юридический пакет · Версия 1.0</div>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function DocsLayout({ activeDoc, setActiveDoc, children }: Props)
                 <h1 className="font-display text-xl font-bold text-white uppercase">
                   {DOCS.find(d => d.id === activeDoc)?.label}
                 </h1>
-                <p className="text-white/30 text-sm mt-0.5">ЕЦСУ 2.0 · {TODAY}</p>
+                <p className="text-white/30 text-sm mt-0.5">ECSU 2.0 · {TODAY}</p>
               </div>
               <button onClick={handlePrint}
                 className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold transition-all hover:scale-105"

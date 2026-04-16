@@ -12,7 +12,7 @@ const INTEGRITY_CHECKS = [
 ];
 
 const BOOT_LOG = [
-  { time: "08:00:00.001", level: "INFO", msg: "Загрузчик ЕЦСУ 2.0 v3.4.1 запущен" },
+  { time: "08:00:00.001", level: "INFO", msg: "Загрузчик ECSU 2.0 v3.4.1 запущен" },
   { time: "08:00:00.045", level: "INFO", msg: "Проверка целостности системных файлов..." },
   { time: "08:00:00.312", level: "OK", msg: "Все 7 модулей прошли проверку хешей" },
   { time: "08:00:00.318", level: "WARN", msg: "rbac.conf: незначительное изменение (обновление конфигурации)" },
@@ -25,7 +25,7 @@ const BOOT_LOG = [
   { time: "08:00:02.450", level: "INFO", msg: "Проверка обновлений загрузчика..." },
   { time: "08:00:03.120", level: "OK", msg: "Загрузчик актуален (v3.4.1 — последняя версия)" },
   { time: "08:00:03.200", level: "INFO", msg: "Запуск основных модулей системы..." },
-  { time: "08:00:04.800", level: "OK", msg: "Система ЕЦСУ 2.0 успешно запущена" },
+  { time: "08:00:04.800", level: "OK", msg: "Система ECSU 2.0 успешно запущена" },
 ];
 
 const ENV_CHECKS = [
@@ -87,7 +87,7 @@ export default function LoaderTab() {
             </div>
             <div>
               <div className="text-white font-bold text-base">Система запущена штатно</div>
-              <div className="text-white/40 text-xs">ЕЦСУ 2.0 Загрузчик v3.4.1 · Последний запуск сегодня в 08:00:04</div>
+              <div className="text-white/40 text-xs">ECSU 2.0 Загрузчик v3.4.1 · Последний запуск сегодня в 08:00:04</div>
             </div>
           </div>
           <div className="flex gap-2">

@@ -27,7 +27,7 @@ export default function EgsuNotifications() {
   const [filter, setFilter] = useState<"all" | "unread" | "security" | "finance" | "system">("all");
   const [toast, setToast] = useState("");
   const [showCreate, setShowCreate] = useState(false);
-  const [form, setForm] = useState({ type: "system", priority: "normal", title: "", body: "", source: "ЕЦСУ", action_url: "" });
+  const [form, setForm] = useState({ type: "system", priority: "normal", title: "", body: "", source: "ECSU", action_url: "" });
   const [saving, setSaving] = useState(false);
 
   const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(""), 3000); };
@@ -63,7 +63,7 @@ export default function EgsuNotifications() {
     const d = parse(await r.json()) as { id: number; message: string };
     setSaving(false);
     setShowCreate(false);
-    setForm({ type: "system", priority: "normal", title: "", body: "", source: "ЕЦСУ", action_url: "" });
+    setForm({ type: "system", priority: "normal", title: "", body: "", source: "ECSU", action_url: "" });
     showToast(`✓ Уведомление #${d.id} создано`);
     load();
   };
@@ -95,7 +95,7 @@ export default function EgsuNotifications() {
           </div>
           <div>
             <div className="font-display text-base font-bold text-white tracking-wide leading-none">УВЕДОМЛЕНИЯ</div>
-            <div className="text-white/30 text-[10px]">ЕЦСУ 2.0 · Центр сообщений</div>
+            <div className="text-white/30 text-[10px]">ECSU 2.0 · Центр сообщений</div>
           </div>
         </div>
         <div className="flex items-center gap-2">

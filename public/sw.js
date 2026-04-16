@@ -1,10 +1,11 @@
 /**
- * ЕЦСУ 2.0 — Service Worker (Офлайн-режим)
+ * ECSU 2.0 — Service Worker (Офлайн-режим)
+ * Единая Центральная Система Управления
  * Кешируем базовые страницы и активы для работы без интернета.
  * Приоритет: Cache First для статики, Network First для API.
  */
 
-const CACHE = "egsu-v2";
+const CACHE = "ecsu-v2";
 const OFFLINE_URL = "/offline.html";
 
 // Страницы и ресурсы для офлайн-кеша

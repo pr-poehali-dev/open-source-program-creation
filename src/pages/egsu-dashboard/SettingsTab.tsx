@@ -189,7 +189,7 @@ export default function SettingsTab() {
         </div>
         <div className="grid md:grid-cols-3 gap-3">
           {[
-            { title: "Документация ЕЦСУ 2.0", desc: "Полное руководство по системе, API и модулям", icon: "FileText", color: "#a855f7" },
+            { title: "Документация ECSU 2.0", desc: "Полное руководство по системе, API и модулям", icon: "FileText", color: "#a855f7" },
             { title: "Видеоинструкции", desc: "Обучающие видео по основным сценариям работы", icon: "Play", color: "#3b82f6" },
             { title: "Чат-бот поддержки", desc: "Интерактивные ответы на частые вопросы 24/7", icon: "Bot", color: "#00ff87" },
           ].map(h => (

@@ -214,8 +214,8 @@ const CATEGORY_LABELS: Record<string, string> = {
 const OWNER = {
   name: "Николаев Владимир Владимирович",
   address: "Российская Федерация",
-  system: "ЕЦСУ 2.0 (Единая Центральная Система Управления)",
-  status: "Гражданин РФ, автор системы ЕЦСУ 2.0 (в стадии разработки)",
+  system: "ECSU 2.0 (Единая Центральная Система Управления)",
+  status: "Гражданин РФ, автор системы ECSU 2.0 (в стадии разработки)",
 };
 
 export default function EgsuEmergency() {
@@ -258,7 +258,7 @@ export default function EgsuEmergency() {
         </div>
         <div>
           <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: 2, color: "#fff" }}>ЭКСТРЕННЫЕ СЛУЖБЫ</div>
-          <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", letterSpacing: 1 }}>ЕЦСУ 2.0 · ВЕДОМСТВА РФ</div>
+          <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", letterSpacing: 1 }}>ECSU 2.0 · ВЕДОМСТВА РФ</div>
         </div>
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8, fontSize: 11 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: isOnline ? "#22c55e" : "#f59e0b", boxShadow: `0 0 6px ${isOnline ? "#22c55e" : "#f59e0b"}` }} />
@@ -371,9 +371,9 @@ export default function EgsuEmergency() {
                     <a href={`tel:${a.phone}`} style={{ flex: 1, background: `${a.color}20`, border: `1px solid ${a.color}40`, borderRadius: 8, padding: "9px 14px", color: a.color, fontWeight: 700, fontSize: 13, textDecoration: "none", textAlign: "center" }}>
                       📞 Позвонить
                     </a>
-                    <a href={`mailto:${a.email}?subject=Обращение по системе ЕЦСУ 2.0&body=От: ${OWNER.name}%0AСистема: ${OWNER.system}%0A%0AОбращение:%0A`}
+                    <a href={`mailto:${a.email}?subject=Обращение по системе ECSU 2.0&body=От: ${OWNER.name}%0AСистема: ${OWNER.system}%0A%0AОбращение:%0A`}
                       style={{ flex: 1, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, padding: "9px 14px", color: "rgba(255,255,255,0.6)", fontWeight: 600, fontSize: 13, textDecoration: "none", textAlign: "center" }}>
-                      ✉️ Email
+                      Email
                     </a>
                     <a href={a.online_appeal} target="_blank" rel="noopener noreferrer"
                       style={{ flex: 1, background: "rgba(59,130,246,0.1)", border: "1px solid rgba(59,130,246,0.3)", borderRadius: 8, padding: "9px 14px", color: "#60a5fa", fontWeight: 600, fontSize: 13, textDecoration: "none", textAlign: "center" }}>
@@ -422,7 +422,7 @@ export default function EgsuEmergency() {
 
         {/* OWNER BADGE */}
         <div style={{ background: "rgba(168,85,247,0.06)", border: "1px solid rgba(168,85,247,0.2)", borderRadius: 12, padding: 16, fontSize: 12, color: "rgba(255,255,255,0.4)", lineHeight: 1.7 }}>
-          <div style={{ fontWeight: 700, color: "#a855f7", marginBottom: 6 }}>Системная информация · ЕЦСУ 2.0</div>
+          <div style={{ fontWeight: 700, color: "#a855f7", marginBottom: 6 }}>Системная информация · ECSU 2.0</div>
           <div>Владелец системы: <span style={{ color: "#e0e8ff" }}>{OWNER.name}</span></div>
           <div>Статус: <span style={{ color: "#e0e8ff" }}>{OWNER.status}</span></div>
           <div>Обращения направляются от имени владельца системы с указанием правовых оснований.</div>

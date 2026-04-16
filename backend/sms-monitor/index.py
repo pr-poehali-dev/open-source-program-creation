@@ -1,5 +1,5 @@
 """
-ЕЦСУ 2.0 — SMS-рассылка + ИИ-мониторинг бездействия ведомств.
+ECSU 2.0 — SMS-рассылка + ИИ-мониторинг бездействия ведомств.
 SMS через SMSC.ru (бесплатный тестовый режим).
 Мониторинг: если ведомство не ответило за 30 дней → автоэскалация в прокуратуру.
 При признаках коррупции → немедленный штраф + отчёт.
@@ -21,7 +21,7 @@ CORS = {
 }
 
 OWNER_NAME = "Николаев Владимир Владимирович"
-OWNER_SYSTEM = "ЕЦСУ 2.0"
+OWNER_SYSTEM = "ECSU 2.0"
 
 # Реальные номера ведомств для SMS (WhatsApp/Telegram-каналы)
 AGENCY_PHONES = {
@@ -143,7 +143,7 @@ def detect_corruption_signs(inaction_days: int, agency_name: str, incident_type:
 
 
 def handler(event: dict, context) -> dict:
-    """SMS-рассылка и ИИ-мониторинг бездействия ведомств ЕЦСУ."""
+    """SMS-рассылка и ИИ-мониторинг бездействия ведомств ECSU."""
     if event.get("httpMethod") == "OPTIONS":
         return {"statusCode": 200, "headers": CORS, "body": ""}
 
@@ -217,7 +217,7 @@ def handler(event: dict, context) -> dict:
         for aid in agency_ids:
             phone = AGENCY_PHONES.get(aid)
             if phone:
-                sms_msg = f"ЕЦСУ 2.0 | {message_text[:120]}"
+                sms_msg = f"ECSU 2.0 | {message_text[:120]}"
                 result = send_sms(phone, sms_msg)
                 sms_results.append({"agency": aid, "status": result.get("status")})
                 cur.execute(f"""
@@ -268,7 +268,7 @@ def handler(event: dict, context) -> dict:
         analysis = detect_corruption_signs(inaction_days, agency_name, incident_type)
 
         # ИИ-анализ ситуации
-        ai_prompt = f"""[СИСТЕМНАЯ ЗАДАЧА — ИИ АДМИНИСТРАТОР ЕЦСУ]
+        ai_prompt = f"""[СИСТЕМНАЯ ЗАДАЧА — ИИ АДМИНИСТРАТОР ECSU]
 Проанализируй бездействие ведомства и составь официальный отчёт.
 
 Ведомство: {agency_name}
@@ -284,13 +284,13 @@ def handler(event: dict, context) -> dict:
 3. Список надзорных органов куда направить
 4. Если есть признаки коррупции — немедленные меры
 
-Стиль: официально-деловой, от имени системы ЕЦСУ 2.0, автор — {OWNER_NAME}."""
+Стиль: официально-деловой, от имени системы ECSU 2.0, автор — {OWNER_NAME}."""
 
         ai_analysis = call_ai(ai_prompt)
 
         # Формируем отчёт для надзорных органов
         escalation_report = f"""ОТЧЁТ О БЕЗДЕЙСТВИИ ДОЛЖНОСТНЫХ ЛИЦ
-Система: ЕЦСУ 2.0 | Автор: {OWNER_NAME}
+Система: ECSU 2.0 | Автор: {OWNER_NAME}
 Дата: {datetime.now(timezone.utc).strftime('%d.%m.%Y')}
 
 Ведомство: {agency_name}
@@ -309,7 +309,7 @@ def handler(event: dict, context) -> dict:
 • Проверка должностных лиц на предмет злоупотреблений
 
 ИИ-АНАЛИЗ:
-{ai_analysis[:800] if ai_analysis else 'Анализ выполнен системой ЕЦСУ 2.0'}
+{ai_analysis[:800] if ai_analysis else 'Анализ выполнен системой ECSU 2.0'}
 
 С уважением,
 {OWNER_NAME}
@@ -347,7 +347,7 @@ def handler(event: dict, context) -> dict:
         if analysis["corruption_likely"]:
             for oversight in OVERSIGHT_AGENCIES[:2]:
                 phone = oversight["phone"]
-                sms_msg = f"ЕЦСУ: Коррупция в {agency_name[:30]}. {inaction_days} дней бездействия. {OWNER_NAME}"
+                sms_msg = f"ECSU: Коррупция в {agency_name[:30]}. {inaction_days} дней бездействия. {OWNER_NAME}"
                 result = send_sms(phone, sms_msg)
                 sms_sent.append({"agency": oversight["name"], "status": result.get("status")})
                 cur.execute(f"""
@@ -382,7 +382,7 @@ def handler(event: dict, context) -> dict:
         if not phone:
             conn.close()
             return err("phone обязателен")
-        msg = f"ЕЦСУ: Ваш запрос на вознаграждение ({reward_type}) {amount} руб. зарегистрирован. Ответ в течение 30 дней."
+        msg = f"ECSU: Ваш запрос на вознаграждение ({reward_type}) {amount} руб. зарегистрирован. Ответ в течение 30 дней."
         result = send_sms(phone, msg)
         cur.execute(f"INSERT INTO {S}.egsu_sms_log (phone, message, agency, status) VALUES (%s, %s, 'reward', %s)",
                     (phone, msg, result.get("status", "unknown")))

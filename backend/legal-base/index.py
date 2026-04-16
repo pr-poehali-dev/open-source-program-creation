@@ -1,5 +1,5 @@
 """
-API правовой базы ЕЦСУ — поиск по законодательству, юрисдикциям, статьям.
+API правовой базы ECSU — поиск по законодательству, юрисдикциям, статьям.
 Также управление API-интеграциями для внешних платформ.
 """
 import json
@@ -156,7 +156,7 @@ def handler(event: dict, context) -> dict:
     i_count = cur.fetchone()[0]
 
     return ok({
-        "system": "ЕЦСУ 2.0 — Правовая база",
+        "system": "ECSU 2.0 — Правовая база",
         "version": "1.0",
         "stats": {
             "jurisdictions": j_count,

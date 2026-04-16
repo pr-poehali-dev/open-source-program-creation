@@ -155,7 +155,7 @@ export default function EgsuCpvoa() {
           ip_address: blockerIp,
           channel,
           block_type: "system_block",
-          description: "Несанкционированная блокировка системы ЕЦСУ — ответ ЦПВОА",
+          description: "Несанкционированная блокировка системы ECSU — ответ ЦПВОА",
         }),
       });
       const data = await resp.json();

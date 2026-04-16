@@ -1,5 +1,5 @@
 """
-Автосканер инцидентов ЕЦСУ 2.0 — парсинг открытых источников.
+Автосканер инцидентов ECSU 2.0 — парсинг открытых источников.
 Источники (все открытые/бесплатные):
   • GDACS (gdacs.org) — стихийные бедствия
   • USGS (earthquake.usgs.gov) — землетрясения
@@ -38,7 +38,7 @@ SOURCES = {
     "emsc": "https://www.seismicportal.eu/fdsnws/event/1/query?limit=10&format=json&minmag=4.5",
 }
 
-# Соответствие источника → тип инцидента ЕЦСУ
+# Соответствие источника → тип инцидента ECSU
 SOURCE_TYPE = {
     "gdacs": "ecology",
     "usgs": "ecology",
@@ -316,7 +316,7 @@ def save_incident(cur, inc: dict) -> dict:
 
 
 def handler(event: dict, context) -> dict:
-    """Автосканер открытых источников инцидентов ЕЦСУ."""
+    """Автосканер открытых источников инцидентов ECSU."""
     if event.get("httpMethod") == "OPTIONS":
         return {"statusCode": 200, "headers": HEADERS, "body": ""}
 

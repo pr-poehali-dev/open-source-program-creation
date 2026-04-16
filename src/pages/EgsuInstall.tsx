@@ -35,7 +35,7 @@ const PLATFORM_STEPS: Record<Platform, { title: string; steps: string[] }> = {
       "Нажмите меню (⋮) в правом верхнем углу",
       "Выберите 'Добавить на главный экран' или 'Установить приложение'",
       "Подтвердите установку нажав 'Добавить'",
-      "Иконка ЕЦСУ появится на главном экране",
+      "Иконка ECSU появится на главном экране",
     ],
   },
   ios: {
@@ -45,7 +45,7 @@ const PLATFORM_STEPS: Record<Platform, { title: string; steps: string[] }> = {
       "Нажмите кнопку 'Поделиться' (квадрат со стрелкой вверх) внизу",
       "Прокрутите вниз и выберите 'На экран Домой'",
       "Нажмите 'Добавить' в правом верхнем углу",
-      "Иконка ЕЦСУ появится на рабочем столе",
+      "Иконка ECSU появится на рабочем столе",
     ],
   },
   mac: {
@@ -132,7 +132,7 @@ export default function EgsuInstall() {
         <div style={{ flex: 1 }} />
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 6px #22c55e" }} />
-          <span style={{ fontSize: 12, color: "#94a3b8" }}>ЕЦСУ 2.0</span>
+          <span style={{ fontSize: 12, color: "#94a3b8" }}>ECSU 2.0</span>
         </div>
       </div>
 
@@ -141,7 +141,7 @@ export default function EgsuInstall() {
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <div style={{ fontSize: 48, marginBottom: 12 }}>🛡️</div>
           <h1 style={{ fontSize: 28, fontWeight: 700, color: "#60a5fa", margin: "0 0 8px" }}>
-            ЕЦСУ 2.0 — Установка
+            ECSU 2.0 — Установка
           </h1>
           <p style={{ color: "#94a3b8", fontSize: 14, margin: 0 }}>
             {CORE_META.appName} · Автор: {CORE_AUTHOR.fullName}
@@ -167,7 +167,7 @@ export default function EgsuInstall() {
             </button>
           </div>
           <p style={{ color: "#64748b", fontSize: 12, margin: "8px 0 0" }}>
-            Отправьте эту ссылку пользователям — они смогут открыть ЕЦСУ с любого устройства без регистрации
+            Отправьте эту ссылку пользователям — они смогут открыть ECSU с любого устройства без регистрации
           </p>
         </div>
 
@@ -219,7 +219,7 @@ export default function EgsuInstall() {
 
           <div style={{ marginTop: 16, padding: 12, background: "#0f2744", borderRadius: 8, fontSize: 12, color: "#64748b", display: "flex", gap: 8, alignItems: "flex-start" }}>
             <Icon name="Info" size={14} />
-            <span>ЕЦСУ работает как PWA (Progressive Web App) — устанавливается с браузера без магазинов приложений. Работает офлайн и обновляется автоматически.</span>
+            <span>ECSU работает как PWA (Progressive Web App) — устанавливается с браузера без магазинов приложений. Работает офлайн и обновляется автоматически.</span>
           </div>
         </div>
 
@@ -230,7 +230,7 @@ export default function EgsuInstall() {
             Автосканирование инцидентов
           </h2>
           <p style={{ color: "#94a3b8", fontSize: 13, margin: "0 0 16px" }}>
-            Запустить парсинг открытых источников (GDACS, USGS, OpenAQ, CVE, ReliefWeb, EMSC) и внести новые инциденты в базу ЕЦСУ
+            Запустить парсинг открытых источников (GDACS, USGS, OpenAQ, CVE, ReliefWeb, EMSC) и внести новые инциденты в базу ECSU
           </p>
           <button
             onClick={runScan}

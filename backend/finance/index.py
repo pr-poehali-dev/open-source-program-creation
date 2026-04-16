@@ -1,5 +1,5 @@
 """
-Финансовый модуль ЕЦСУ 2.0 — управление счетами, картами, транзакциями, правилами,
+Финансовый модуль ECSU 2.0 — управление счетами, картами, транзакциями, правилами,
 аналитикой, уведомлениями, профилем и настройками владельца.
 """
 import json
@@ -481,7 +481,7 @@ def handler(event: dict, context) -> dict:
             FROM {S}.egsu_security_events ORDER BY created_at DESC
         """)
         sec = [{"id":r[0],"type":r[1],"severity":r[2],"ip":r[3],"description":r[4],"penalty":float(r[5]),"blocked":r[6],"created_at":str(r[7])} for r in cur.fetchall()]
-        return ok({"exported_at": datetime.now().isoformat(), "system": "ЕЦСУ 2.0", "version": "2026",
+        return ok({"exported_at": datetime.now().isoformat(), "system": "ECSU 2.0", "version": "2026",
                    "accounts": accs, "transactions": txs, "security_events": sec,
                    "summary": {"accounts": len(accs), "transactions": len(txs), "security_events": len(sec)}})
 
@@ -536,7 +536,7 @@ def handler(event: dict, context) -> dict:
         cur.execute(f"SELECT action, ip_address, created_at FROM {S}.egsu_access_log ORDER BY created_at DESC LIMIT 5")
         last_access = [{"action": r[0], "ip": r[1], "at": str(r[2])} for r in cur.fetchall()]
         return ok({"owner_name": settings.get("owner_display_name",{}).get("value","Владелец"),
-                   "system_name": settings.get("system_name",{}).get("value","ЕЦСУ 2.0"),
+                   "system_name": settings.get("system_name",{}).get("value","ECSU 2.0"),
                    "settings": settings,
                    "stats": {"unread_notifications": unread, "threats_today": threats_today, "transactions_today": tx_today},
                    "last_access": last_access})

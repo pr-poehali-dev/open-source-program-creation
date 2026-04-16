@@ -74,7 +74,7 @@ export default function FinanceLayout({
             <Icon name="Wallet" size={14} className="text-black" />
           </div>
           <div>
-            <div className="font-display text-base font-bold text-white tracking-wide leading-none">ФИНАНСЫ ЕЦСУ</div>
+            <div className="font-display text-base font-bold text-white tracking-wide leading-none">ФИНАНСЫ ECSU</div>
             <div className="text-white/30 text-[10px]">Счета · Карты · Распределение</div>
           </div>
         </div>

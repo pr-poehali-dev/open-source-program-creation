@@ -9,8 +9,8 @@ const GATEWAY_API = "https://functions.poehali.dev/417cb87f-8717-4563-a698-6e3f5
 const OWNER = {
   name: "Николаев Владимир Владимирович",
   address: "Российская Федерация",
-  system: "ЕЦСУ 2.0 (Единая Центральная Система Управления)",
-  status: "гражданское лицо, автор системы ЕЦСУ 2.0",
+  system: "ECSU 2.0 (Единая Центральная Система Управления)",
+  status: "гражданское лицо, автор системы ECSU 2.0",
 };
 
 // Правовые нормы по типу нарушения
@@ -188,7 +188,7 @@ ${OWNER.name}
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           agency_ids: [agencyId],
-          message: `ЕЦСУ 2.0: Обращение направлено. ${form.incident_title || "Уведомление о нарушении"}. От: ${OWNER.name}`,
+          message: `ECSU 2.0: Обращение направлено. ${form.incident_title || "Уведомление о нарушении"}. От: ${OWNER.name}`,
           incident_type: incidentType || "default",
         }),
       });
@@ -213,7 +213,7 @@ ${OWNER.name}
         </div>
         <div>
           <div style={{ fontWeight: 700, fontSize: 14, letterSpacing: 2, color: "#fff" }}>ОБРАЩЕНИЯ В ВЕДОМСТВА</div>
-          <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)" }}>ИИ-генерация · Правовые нормы · ЕЦСУ 2.0</div>
+          <div style={{ fontSize: 10, color: "rgba(255,255,255,0.3)" }}>ИИ-генерация · Правовые нормы · ECSU 2.0</div>
         </div>
         {/* Шаги */}
         <div style={{ marginLeft: "auto", display: "flex", gap: 6 }}>
@@ -374,7 +374,7 @@ ${OWNER.name}
             </div>
 
             <div style={{ marginTop: 20, padding: 14, background: "rgba(245,158,11,0.06)", border: "1px solid rgba(245,158,11,0.2)", borderRadius: 10, fontSize: 12, color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}>
-              <strong style={{ color: "#f59e0b" }}>Важно:</strong> Система ЕЦСУ 2.0 находится в стадии разработки как гражданская инициатива. Обращения направляются от имени гражданина РФ — {OWNER.name}. Согласно ФЗ №59, ведомства обязаны ответить в течение 30 дней. При бездействии — жалоба в прокуратуру (ст. 5.59 КоАП РФ).
+              <strong style={{ color: "#f59e0b" }}>Важно:</strong> Система ECSU 2.0 находится в стадии разработки как гражданская инициатива. Обращения направляются от имени гражданина РФ — {OWNER.name}. Согласно ФЗ №59, ведомства обязаны ответить в течение 30 дней. При бездействии — жалоба в прокуратуру (ст. 5.59 КоАП РФ).
             </div>
           </div>
         )}

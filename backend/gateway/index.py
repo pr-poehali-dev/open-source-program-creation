@@ -1,5 +1,5 @@
 """
-ЕЦСУ 2.0 — Публичный API-шлюз (Gateway).
+ECSU 2.0 — Публичный API-шлюз (Gateway).
 Открытый сервер для интеграции внешних систем.
 Предоставляет: публичный ключ, статус, инциденты, отправку обращений.
 Доступен без аутентификации (read-only) и с API-ключом (write).
@@ -26,7 +26,7 @@ CORS = {
 SYSTEM_ID = "egsu-2.0-open"
 SYSTEM_VERSION = "2.0.0"
 OWNER = "Николаев Владимир Владимирович"
-SYSTEM_NAME = "ЕЦСУ 2.0 (Единая Центральная Система Управления)"
+SYSTEM_NAME = "ECSU 2.0 (Единая Центральная Система Управления)"
 
 # Публичный ключ системы (RSA-подобная заглушка — в продакшне заменить на реальный)
 PUBLIC_KEY_PEM = """-----BEGIN PUBLIC KEY-----
@@ -60,7 +60,7 @@ def verify_api_key(headers: dict) -> bool:
 
 
 def handler(event: dict, context) -> dict:
-    """Публичный API-шлюз ЕЦСУ 2.0 — открытая интеграция."""
+    """Публичный API-шлюз ECSU 2.0 — открытая интеграция."""
     if event.get("httpMethod") == "OPTIONS":
         return {"statusCode": 200, "headers": CORS, "body": ""}
 
@@ -164,7 +164,7 @@ def handler(event: dict, context) -> dict:
         conn.close()
         return ok({
             "reward_types": rows,
-            "legal_note": "Выплаты производятся государственными органами при подтверждении факта. ЕЦСУ 2.0 содействует оформлению заявок.",
+            "legal_note": "Выплаты производятся государственными органами при подтверждении факта. ECSU 2.0 содействует оформлению заявок.",
             "owner": OWNER,
         })
 
@@ -187,7 +187,7 @@ def handler(event: dict, context) -> dict:
         return ok({
             "code": code,
             "status": "registered",
-            "message": f"Обращение {code} зарегистрировано в системе ЕЦСУ 2.0",
+            "message": f"Обращение {code} зарегистрировано в системе ECSU 2.0",
             "next_steps": ["Обращение будет направлено в соответствующие органы", "Срок рассмотрения: 30 дней (ФЗ №59)", "При бездействии — автоэскалация в прокуратуру"],
         }, 201)
 
@@ -218,7 +218,7 @@ def handler(event: dict, context) -> dict:
 
         # Формируем официальный запрос в орган
         reward_text = f"""ОФИЦИАЛЬНЫЙ ЗАПРОС НА ВЫПЛАТУ ВОЗНАГРАЖДЕНИЯ
-Исх. №ЕЦСУ-{req_id}-{datetime.now(timezone.utc).strftime('%Y%m%d')}
+Исх. №ECSU-{req_id}-{datetime.now(timezone.utc).strftime('%Y%m%d')}
 
 Кому: {rt.get('payer', 'Уполномоченный орган') if isinstance(rt, dict) else 'Уполномоченный орган'}
 От: {OWNER}, автор системы {SYSTEM_NAME}
@@ -318,7 +318,7 @@ Email: nikolaevvladimir77@yandex.ru"""
         req_id = cur.fetchone()["id"]
         conn.commit()
         conn.close()
-        return ok({"request_id": req_id, "status": "registered", "message": "Юридический запрос зарегистрирован в ЕЦСУ 2.0"}, 201)
+        return ok({"request_id": req_id, "status": "registered", "message": "Юридический запрос зарегистрирован в ECSU 2.0"}, 201)
 
     conn.close()
     return err("Маршрут не найден", 404)

@@ -246,7 +246,7 @@ export default function LicenseTab() {
               <h3 className="text-white font-semibold text-sm uppercase tracking-wider">Сообщить о нарушении</h3>
             </div>
           </div>
-          <p className="text-white/40 text-xs mb-4">Если вы обнаружили нелицензионное использование ЕЦСУ 2.0 — сообщите нам. Ваша идентичность защищена.</p>
+          <p className="text-white/40 text-xs mb-4">Если вы обнаружили нелицензионное использование ECSU 2.0 — сообщите нам. Ваша идентичность защищена.</p>
           {!reportOpen ? (
             <button onClick={() => setReportOpen(true)}
               className="w-full py-2.5 rounded-xl text-sm font-semibold transition-all hover:scale-[1.02]"
@@ -272,7 +272,7 @@ export default function LicenseTab() {
           )}
           <div className="mt-4 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}>
             <div className="text-white/20 text-[10px] leading-relaxed">
-              © 2026 Николаев Владимир Владимирович. Все права защищены. ЕЦСУ 2.0 является зарегистрированным программным обеспечением. Несанкционированное копирование, распространение и использование преследуется по международному праву.
+              © 2026 Николаев Владимир Владимирович. Все права защищены. ECSU 2.0 является зарегистрированным программным обеспечением. Несанкционированное копирование, распространение и использование преследуется по международному праву.
             </div>
           </div>
         </div>

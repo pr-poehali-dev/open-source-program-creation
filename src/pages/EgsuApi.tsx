@@ -25,18 +25,18 @@ const ENDPOINTS = [
     color: "#a855f7",
     icon: "Scale",
     items: [
-      { method: "GET", path: "/", desc: "Статистика правовой базы (юрисдикции, документы, статьи)", params: [], response: '{"system": "ЕЦСУ 2.0", "stats": {...}}' },
+      { method: "GET", path: "/", desc: "Статистика правовой базы (юрисдикции, документы, статьи)", params: [], response: '{"system": "ECSU 2.0", "stats": {...}}' },
       { method: "GET", path: "/jurisdictions", desc: "Список всех юрисдикций с количеством документов", params: [], response: '[{"id":1,"code":"INT","name":"Международное право",...}]' },
       { method: "GET", path: "/documents", desc: "Список правовых документов с фильтрацией", params: ["jurisdiction_id", "category"], response: '[{"id":1,"title":"Конституция РФ","category":"constitution",...}]' },
       { method: "GET", path: "/articles", desc: "Статьи с полнотекстовым поиском", params: ["document_id", "q"], response: '[{"article_number":"Статья 42","content":"...","tags":[...]}]' },
       { method: "GET", path: "/integrations", desc: "Реестр зарегистрированных интеграций", params: [], response: '[{"id":1,"platform_name":"...","permissions":[...]}]' },
-      { method: "POST", path: "/integrations", desc: "Зарегистрировать новую интеграцию и получить API-ключ", params: ["platform_name", "description", "permissions"], response: '{"id":2,"api_key":"egsu-xxx","message":"Интеграция зарегистрирована"}' },
+      { method: "POST", path: "/integrations", desc: "Зарегистрировать новую интеграцию и получить API-ключ", params: ["platform_name", "description", "permissions"], response: '{"id":2,"api_key":"ecsu-xxx","message":"Интеграция зарегистрирована"}' },
     ],
     base: API,
   },
 ];
 
-const EMBED_CODE = `<!-- ЕЦСУ 2.0 — Встраиваемый виджет инцидентов -->
+const EMBED_CODE = `<!-- ECSU 2.0 — Встраиваемый виджет инцидентов -->
 <div id="egsu-widget"></div>
 <script>
   fetch('${INCIDENTS_API}')
@@ -45,7 +45,7 @@ const EMBED_CODE = `<!-- ЕЦСУ 2.0 — Встраиваемый виджет 
       const data = typeof raw === 'string' ? JSON.parse(raw) : raw;
       const incidents = data.incidents || [];
       const el = document.getElementById('egsu-widget');
-      el.innerHTML = '<h3>Инциденты ЕЦСУ</h3>' +
+      el.innerHTML = '<h3>Инциденты ECSU</h3>' +
         incidents.slice(0, 5).map(i =>
           '<div style="padding:8px;border:1px solid #333;margin:4px;border-radius:6px">' +
           '<strong>' + i.incident_code + '</strong> ' + i.title +
@@ -61,7 +61,7 @@ const IFRAME_CODE = `<iframe
   height="800"
   frameborder="0"
   allow="microphone"
-  title="ЕЦСУ 2.0 — Система управления"
+  title="ECSU 2.0 — Система управления"
 ></iframe>`;
 
 export default function EgsuApi() {
@@ -164,7 +164,7 @@ export default function EgsuApi() {
           <div>
             <div className="mb-6 p-5 rounded-2xl" style={{ background: "rgba(0,255,135,0.05)", border: "1px solid rgba(0,255,135,0.15)" }}>
               <div className="text-white font-bold mb-1">Автономный режим</div>
-              <p className="text-white/50 text-sm">Система ЕЦСУ 2.0 работает полностью независимо от любой платформы. API доступен 24/7 и может быть использован на любом сайте, мобильном приложении или сервере без привязки к poehali.dev.</p>
+              <p className="text-white/50 text-sm">Система ECSU 2.0 работает полностью независимо от любой платформы. API доступен 24/7 и может быть использован на любом сайте, мобильном приложении или сервере без привязки к poehali.dev.</p>
             </div>
 
             {ENDPOINTS.map(group => (
@@ -219,12 +219,12 @@ export default function EgsuApi() {
           <div className="space-y-6">
             <div>
               <h2 className="font-display text-xl font-bold text-white uppercase mb-2">Встраивание на сайт</h2>
-              <p className="text-white/40 text-sm">ЕЦСУ 2.0 может работать на любом сайте или платформе</p>
+              <p className="text-white/40 text-sm">ECSU 2.0 может работать на любом сайте или платформе</p>
             </div>
 
             {[
               { title: "JavaScript виджет — список инцидентов", icon: "Code2", color: "#f59e0b", code: EMBED_CODE, desc: "Встройте живой список инцидентов на любой сайт через JS" },
-              { title: "Iframe — полный интерфейс системы", icon: "LayoutTemplate", color: "#3b82f6", code: IFRAME_CODE, desc: "Встройте весь интерфейс ЕЦСУ как вставку на странице" },
+              { title: "Iframe — полный интерфейс системы", icon: "LayoutTemplate", color: "#3b82f6", code: IFRAME_CODE, desc: "Встройте весь интерфейс ECSU как вставку на странице" },
             ].map((item, i) => (
               <div key={i} className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
                 <div className="flex items-center justify-between px-5 py-4" style={{ background: "rgba(255,255,255,0.03)" }}>
@@ -319,7 +319,7 @@ export default function EgsuApi() {
           <div className="max-w-lg">
             <div className="mb-6">
               <h2 className="font-display text-xl font-bold text-white uppercase">Получить API-ключ</h2>
-              <p className="text-white/40 text-sm mt-1">Зарегистрируйте вашу платформу для интеграции с ЕЦСУ</p>
+              <p className="text-white/40 text-sm mt-1">Зарегистрируйте вашу платформу для интеграции с ECSU</p>
             </div>
 
             {newKey ? (
