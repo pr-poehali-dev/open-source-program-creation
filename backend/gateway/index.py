@@ -209,19 +209,116 @@ def handler(event: dict, context) -> dict:
 
         cur.execute(f"""
             INSERT INTO {S}.egsu_reward_requests
-            (reward_type_id, incident_id, applicant_name, bank_name, bank_account, card_number, amount_requested_rub, legal_basis, status)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'pending')
+            (reward_type_id, incident_id, applicant_name, bank_name, bank_account, card_number,
+             amount_requested_rub, legal_basis, status, owner_email)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'pending', 'nikolaevvladimir77@yandex.ru')
             RETURNING id
         """, (rt["id"], incident_id, OWNER, bank_name, bank_account, card_number, amount or None, legal_basis))
         req_id = cur.fetchone()["id"]
+
+        # Формируем официальный запрос в орган
+        reward_text = f"""ОФИЦИАЛЬНЫЙ ЗАПРОС НА ВЫПЛАТУ ВОЗНАГРАЖДЕНИЯ
+Исх. №ЕЦСУ-{req_id}-{datetime.now(timezone.utc).strftime('%Y%m%d')}
+
+Кому: {rt.get('payer', 'Уполномоченный орган') if isinstance(rt, dict) else 'Уполномоченный орган'}
+От: {OWNER}, автор системы {SYSTEM_NAME}
+Email: nikolaevvladimir77@yandex.ru
+
+На основании: {legal_basis or rt.get('legal_basis','ФЗ №273') if isinstance(rt, dict) else 'ФЗ №273'}
+
+Настоящим прошу рассмотреть и произвести выплату вознаграждения за содействие в соответствии с действующим законодательством РФ.
+
+Тип вознаграждения: {reward_type_code}
+Запрашиваемая сумма: {amount:,.0f} руб.
+Банк: {bank_name}
+Счёт/карта: {bank_account or card_number}
+
+С уважением,
+{OWNER}
+{SYSTEM_NAME}
+Email: nikolaevvladimir77@yandex.ru"""
+
+        cur.execute(f"""
+            UPDATE {S}.egsu_reward_requests
+            SET agency_sent_to = %s
+            WHERE id = %s
+        """, (f"Запрос сформирован. Email: nikolaevvladimir77@yandex.ru", req_id))
+
+        cur.execute(f"""
+            INSERT INTO {S}.egsu_system_log (event_type, source, message, data)
+            VALUES ('reward_request', 'gateway', %s, %s)
+        """, (f"Заявка #{req_id} на вознаграждение — {OWNER}", json.dumps({"req_id": req_id, "type": reward_type_code, "amount": amount, "email": "nikolaevvladimir77@yandex.ru"}, default=str)))
+
         conn.commit()
         conn.close()
         return ok({
             "request_id": req_id,
             "status": "pending",
-            "message": f"Заявка #{req_id} на вознаграждение создана. Будет направлена в соответствующий орган.",
+            "owner_email": "nikolaevvladimir77@yandex.ru",
+            "appeal_text": reward_text,
+            "message": f"Заявка #{req_id} создана. Запрос направляется от {OWNER} (nikolaevvladimir77@yandex.ru). Ответ в течение 30 дней.",
             "legal_basis": legal_basis or "ФЗ №273 / ФЗ №59",
+            "next_steps": [
+                f"Направить текст запроса в {reward_type_code}-орган",
+                "При отсутствии ответа в 30 дней — автоэскалация в прокуратуру",
+                "Уведомление о статусе придёт на nikolaevvladimir77@yandex.ru",
+            ],
         }, 201)
+
+    # ── GET /tariffs — тарифы для пользователей ───────────────────────────────
+    if method == "GET" and "/tariffs" in path:
+        cur.execute(f"SELECT * FROM {S}.egsu_tariffs WHERE is_active=true ORDER BY sort_order")
+        rows = []
+        for r in cur.fetchall():
+            row = dict(r)
+            row["features_list"] = row.get("features", "").split("|") if row.get("features") else []
+            rows.append(row)
+        conn.close()
+        return ok({"tariffs": rows, "currency": "RUB", "owner_email": "nikolaevvladimir77@yandex.ru"})
+
+    # ── POST /subscribe — подписка пользователя ───────────────────────────────
+    if method == "POST" and "/subscribe" in path:
+        user_name = body.get("user_name", "Пользователь")
+        user_email = body.get("user_email", "")
+        user_phone = body.get("user_phone", "")
+        tariff_code = body.get("tariff_code", "free")
+        session_id = body.get("session_id", "")
+
+        cur.execute(f"""
+            INSERT INTO {S}.egsu_user_subscriptions
+            (session_id, user_name, user_email, user_phone, tariff_code, status)
+            VALUES (%s, %s, %s, %s, %s, 'active')
+            RETURNING id
+        """, (session_id, user_name, user_email, user_phone, tariff_code))
+        sub_id = cur.fetchone()["id"]
+        conn.commit()
+        conn.close()
+        return ok({"subscription_id": sub_id, "tariff_code": tariff_code, "status": "active"}, 201)
+
+    # ── POST /legal-request — юридический запрос пользователя ────────────────
+    if method == "POST" and "/legal-request" in path:
+        user_name = body.get("user_name", "Пользователь")
+        request_type = body.get("request_type", "general")
+        description = body.get("description", "")
+        country = body.get("country", "RUS")
+        agency = body.get("agency_target", "")
+        legal_basis = body.get("legal_basis", "")
+        session_id = body.get("session_id", "")
+
+        if not description:
+            conn.close()
+            return err("description обязателен")
+
+        cur.execute(f"""
+            INSERT INTO {S}.egsu_legal_requests
+            (session_id, user_name, request_type, description, country, agency_target, legal_basis, status)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, 'pending')
+            RETURNING id
+        """, (session_id, user_name, request_type, description, country, agency, legal_basis))
+        req_id = cur.fetchone()["id"]
+        conn.commit()
+        conn.close()
+        return ok({"request_id": req_id, "status": "registered", "message": "Юридический запрос зарегистрирован в ЕЦСУ 2.0"}, 201)
 
     conn.close()
     return err("Маршрут не найден", 404)

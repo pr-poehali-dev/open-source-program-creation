@@ -91,9 +91,15 @@ export default function DashboardLayout({ activeTab, setActiveTab, chatOpen, set
             <Icon name="FileText" size={14} />
             <span className="hidden md:block">Документы</span>
           </button>
-          <button onClick={() => navigate("/egsu/rewards")}
+          <button onClick={() => navigate("/egsu/for-users")}
             className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:scale-105"
             style={{ background: "rgba(0,255,135,0.1)", color: "#00ff87", border: "1px solid rgba(0,255,135,0.25)" }}>
+            <Icon name="Users" size={14} />
+            <span className="hidden md:block">Пользователям</span>
+          </button>
+          <button onClick={() => navigate("/egsu/rewards")}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:scale-105"
+            style={{ background: "rgba(0,255,135,0.08)", color: "#00ff87", border: "1px solid rgba(0,255,135,0.2)" }}>
             <Icon name="Coins" size={14} />
             <span className="hidden md:block">Вознаграждения</span>
           </button>
