@@ -109,6 +109,12 @@ export default function DashboardLayout({ activeTab, setActiveTab, chatOpen, set
             <Icon name="ShieldAlert" size={14} />
             <span className="hidden md:block">Экстренные</span>
           </button>
+          <button onClick={() => navigate("/egsu/export")}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:scale-105"
+            style={{ background: "rgba(168,85,247,0.12)", color: "#c084fc", border: "1px solid rgba(168,85,247,0.25)" }}>
+            <Icon name="Package" size={14} />
+            <span className="hidden md:block">Экспорт</span>
+          </button>
           <button onClick={() => navigate("/egsu/install")}
             className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:scale-105"
             style={{ background: "rgba(34,197,94,0.12)", color: "#22c55e", border: "1px solid rgba(34,197,94,0.25)" }}>

@@ -1,0 +1,61 @@
+{
+  "tests": [
+    {
+      "name": "Информация о модуле",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": {"module": "ECSU Export Manager"},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Список лицензий",
+      "method": "GET",
+      "path": "/licenses",
+      "expectedStatus": 200,
+      "expectedBody": {"licenses": ["MIT"]},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Шаблоны проектов",
+      "method": "GET",
+      "path": "/templates",
+      "expectedStatus": 200,
+      "expectedBody": {"templates": []},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Генерация setup.py",
+      "method": "POST",
+      "path": "/setup",
+      "body": {"project_name": "test-project", "author": "Test Author", "license_type": "MIT"},
+      "expectedStatus": 200,
+      "expectedBody": {"filename": "setup.py"},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Генерация лицензии MIT",
+      "method": "POST",
+      "path": "/license",
+      "body": {"license_type": "MIT", "author": "Test Author"},
+      "expectedStatus": 200,
+      "expectedBody": {"license_type": "MIT"},
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Генерация полного пакета",
+      "method": "POST",
+      "path": "/generate",
+      "body": {
+        "project_name": "my-project",
+        "version": "1.0.0",
+        "author": "Тест",
+        "license_type": "MIT",
+        "dependencies": ["Flask>=2.0.0"]
+      },
+      "expectedStatus": 201,
+      "expectedBody": {"status": "success"},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
